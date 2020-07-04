@@ -30,7 +30,7 @@ import OrderSheet from './pages/OrderSheet'
 import Menu from './pages/Menu'
 import Payment from './pages/Payment'
 import CheckOut from './pages/CheckOut'
-import LoadingScreeen from './pages/LoadingScreen'
+
 
 
 export default function Routes(){
