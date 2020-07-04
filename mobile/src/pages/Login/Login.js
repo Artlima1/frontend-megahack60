@@ -18,8 +18,8 @@ export default function Login({navigation}){
             <Text>Login screen</Text>
             
             <View style={styles.form}>
-                <TextInput style={styles.inputField} label="E-mail" value={email} onChangeText={email => setEmail(email)} />
-                <TextInput textInputStyle={styles.inputField} label="Senha" value={password} onChangeText={password => setPassword(password)} secureTextEntry={true} textContentType="password" autoCompleteType="password"/>
+                {/* <TextInput style={styles.inputField} label="E-mail" value={email} onChangeText={email => setEmail(email)} />
+                <TextInput textInputStyle={styles.inputField} label="Senha" value={password} onChangeText={password => setPassword(password)} secureTextEntry={true} textContentType="password" autoCompleteType="password"/> */}
             </View>
 
             <Button title='Cadastro' onPress={()=>{navigation.push('SignUp')}}/>
