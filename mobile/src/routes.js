@@ -32,7 +32,6 @@ import Payment from './pages/Payment'
 import CheckOut from './pages/CheckOut'
 
 
-
 export default function Routes(){
 
     const [user, setUser] = useState(null)
