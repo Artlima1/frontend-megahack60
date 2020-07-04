@@ -9,7 +9,9 @@ export default StyleSheet.create({
     profileTitle: {
         fontSize: 45,
         color: '#F4AA1D',
-        elevation: 8,
+        // shadowColor: "#000",
+        // shadowRadius: 3.84,
+        // elevation: 8,
     },
     profileHeader: {
         alignItems: 'center',
@@ -17,10 +19,49 @@ export default StyleSheet.create({
         backgroundColor: '#455056',
         height: 160,
     },
+    text: {
+        fontSize: 12,
+        color: '#FFFFFF',
+        marginLeft: 50,
+    },
+    heartIcon: {
+        position: 'absolute',
+        marginTop: 30,
+        marginLeft: 15,
+    },
+    cardIcon: {
+        position: 'absolute',
+        marginTop: 115,
+        marginLeft: 15,
+    },
+    alertIcon: {
+        position: 'absolute',
+        marginTop: 200,
+        marginLeft: 15,
+    },
+    helpIcon: {
+        position: 'absolute',
+        marginTop: 280,
+        marginLeft: 15,
+    },
+    exitIcon: {
+        position: 'absolute',
+        marginTop: 365,
+        marginLeft: 15,
+    },
     optionsButtonText: {
         color: '#FFFFFF',
-        fontSize: 20,
-        marginTop: 30,
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginTop: 20,
+        marginLeft: 50,
+    },
+    whiteDivider: {
+        backgroundColor: '#FFFFFF',
+        height: 1,
+        width: 300,
+        alignSelf: 'center',
+        marginTop: 20,
     },
     userStyle: {
         flexDirection: 'row-reverse',
@@ -28,16 +69,23 @@ export default StyleSheet.create({
         height: 33,
         alignItems: 'center',
         justifyContent: 'center',
+        marginBottom: 20,
     },
     userText: {
         color: '#FFFFFF',
         fontSize: 25,
         fontWeight: 'bold'
     },
+    logoContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     logoImage: {
         flex: 1,
-        width: 50,
-        height: 50,
-        resizeMode: 'contain' 
+        width: 200,
+        height: 200,
+        resizeMode: 'contain',
+        marginTop: 170,
+        alignSelf: 'center',
     }
 });
