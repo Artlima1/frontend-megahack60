@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   TextInput as _TextInput,
   StyleSheet,
@@ -6,15 +6,15 @@ import {
   Text,
   Animated,
   TouchableOpacity,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+} from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const TextInput = React.forwardRef((props, ref) => {
   const styles = getStyles();
   const [isFocused, setIsFocused] = useState(false);
   const [content, setContent] = useState(props.value);
   const [focusAnimated] = useState(new Animated.Value(0));
-  const [labelText, setLabelText] = useState('');
+  const [labelText, setLabelText] = useState("");
   const [error, setError] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState();
 
@@ -32,13 +32,13 @@ const TextInput = React.forwardRef((props, ref) => {
   }, [props.secureTextEntry]);
 
   const textInputStyle = [styles.textInput];
-  if (typeof passwordVisible !== 'undefined')
+  if (typeof passwordVisible !== "undefined")
     textInputStyle.push(styles.textInputPass);
 
   if (error) textInputStyle.push(styles.textInputError);
   textInputStyle.push(props.textInputStyle);
 
-  let labelStyle = { display: 'none' };
+  let labelStyle = { display: "none" };
   if (labelText) {
     let labelActive = isFocused || content;
 
@@ -49,17 +49,18 @@ const TextInput = React.forwardRef((props, ref) => {
     }).start();
 
     labelStyle = {
-      color: '#F4AA1D',
-      position: 'absolute',
+      color: "#F4AA1D",
+      position: "absolute",
       left: 4,
       top: focusAnimated.interpolate({
         inputRange: [0, 1],
-        outputRange: [styles.textInput.paddingTop + 3.5, 0],
+        outputRange: [styles.textInput.paddingTop - 8, 0],
       }),
       fontSize: focusAnimated.interpolate({
         inputRange: [0, 1],
         outputRange: [16, 14],
       }),
+      zIndex: 3,
       // color: focusAnimated.interpolate({
       //   inputRange: [0, 1],
       //   outputRange: [colors.text, colors.text],
@@ -89,19 +90,19 @@ const TextInput = React.forwardRef((props, ref) => {
   }
 
   function getTextInputSecureTextEntry() {
-    if (typeof passwordVisible !== 'undefined') return passwordVisible;
+    if (typeof passwordVisible !== "undefined") return passwordVisible;
     return false;
   }
 
   function getIconName() {
-    return passwordVisible ? 'visibility' : 'visibility-off';
+    return passwordVisible ? "eye" : "eye-off";
   }
 
   return (
     <View style={props.style}>
       <Animated.Text style={labelStyle}>{labelText}</Animated.Text>
       <_TextInput
-        placeholderTextColor={'#F4AA1D'}
+        placeholderTextColor={"#F4AA1D"}
         {...props}
         style={textInputStyle}
         onFocus={handleFocus}
@@ -111,17 +112,18 @@ const TextInput = React.forwardRef((props, ref) => {
         onChangeText={handleOnChangeText}
         secureTextEntry={getTextInputSecureTextEntry()}
       />
-      {typeof passwordVisible !== 'undefined' && (
+      {typeof passwordVisible !== "undefined" && (
         <TouchableOpacity
           onPress={handlePasswordVisibility}
-          style={styles.icon}>
-          <Icon
+          style={styles.icon}
+        >
+          <MaterialCommunityIcons
             name={getIconName()}
             size={24}
             color={
               props.placeholderTextColor
                 ? props.placeholderTextColor
-                : '#F4AA1D'
+                : "#F4AA1D"
             }
           />
         </TouchableOpacity>
@@ -140,22 +142,26 @@ export default TextInput;
 function getStyles() {
   return StyleSheet.create({
     textInput: {
+      paddingTop: 20,
       fontSize: 16,
-      borderColor: '#F4AA1D',
+      borderColor: "#F4AA1D",
       borderWidth: 1,
-      padding: 6,
-      color: '#F4AA1D',
+      borderRadius: 8,
+      paddingBottom: 6,
+      color: "#fff",
+      backgroundColor: "#000000aa",
+      padding: 10,
     },
     icon: {
-      position: 'absolute',
-      right: 1,
-      top: 24,
+      position: "absolute",
+      right: 8,
+      top: 12,
     },
     textError: {
-      color: 'red',
+      color: "red",
     },
     textInputError: {
-      borderBottomColor: 'red',
+      borderColor: "red",
     },
     textInputPass: {
       paddingRight: 30,
