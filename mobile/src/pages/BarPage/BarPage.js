@@ -239,7 +239,7 @@ export default function ParPage({ navigation, route }) {
           <View style={styles.clientsContainer}>
             <FontAwesome name="users" size={30} color="#ffffff" />
             <View style={styles.clientsString}>
-              <Text style={styles.clientsNumber}> {guests}</Text>
+              <Text style={styles.clientsNumber}> {guests ? guests : 0}</Text>
               <Text style={styles.clients}> pessoas </Text>
             </View>
           </View>

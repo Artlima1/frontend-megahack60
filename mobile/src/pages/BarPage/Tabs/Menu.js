@@ -32,16 +32,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   infoContainer: {
-    margin: 10,
+    margin: 0,
     justifyContent: "space-around",
+    alignContent: 'center',
   },
   productName: {
     textTransform: "uppercase",
     color: "#ffffff",
   },
   productDescription: {
+    width: 200,
     color: "#ffffff",
-    fontSize: 10,
+    fontSize: 13,
+    flexWrap: 'wrap'
   },
   productPrice: {
     color: "#ffffff",
