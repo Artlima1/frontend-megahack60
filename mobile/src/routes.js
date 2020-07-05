@@ -1,7 +1,12 @@
 import React, { useState, useEffect, useMemo } from "react";
 import AuthContext from "./context";
+import OrderSheetContext from "./contextOrderSheet";
 
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  DefaultTheme,
+  useNavigation,
+} from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -38,10 +43,23 @@ export default function Routes() {
   const [user, setUser] = useState(null);
   useEffect(() => {
     async function getData() {
-      const data = await AsyncStorage.getItem(`@friday:data`);
+      let data = await AsyncStorage.getItem(`@friday:data`);
 
-      JSON.parse(data);
-      if (data && data !== null) setUser(data);
+      data = JSON.parse(data);
+
+      if (data && data !== null) {
+        api.interceptors.request.use(
+          (config) => {
+            const token = data.accessToken;
+            if (token && token !== " ")
+              config.headers.authorization = `Bearer ${token}`;
+
+            return config;
+          },
+          (error) => Promise.reject(error)
+        );
+        setUser(data);
+      }
     }
     getData();
   }, []);
@@ -144,6 +162,7 @@ function HomeRouter() {
 }
 
 function EventsRouter() {
+  const navigation = useNavigation();
   return (
     <EventsStack.Navigator>
       <EventsStack.Screen
@@ -156,7 +175,9 @@ function EventsRouter() {
                 icon="qrcode-scan"
                 color="white"
                 size={35}
-                onPress={() => {}}
+                onPress={() => {
+                  navigation.navigate("Comanda");
+                }}
               />
             );
           },
@@ -194,13 +215,30 @@ function ProfileRouter() {
 }
 
 function OrderSheetRouter() {
+  const [order, setOrder] = useState();
+
+  const orderSheetContext = useMemo(() => {
+    return {
+      setOderSheet: (OrderSheet) => {
+        setOrder(OrderSheet);
+      },
+      getOrder: () => {
+        return order;
+      },
+    };
+  }, []);
+
   return (
-    <OrderSheetStack.Navigator headerMode="none">
-      <OrderSheetStack.Screen name="Comanda" component={OrderSheet} />
-      <OrderSheetStack.Screen name="Escanear" component={QRScanner} />
-      <OrderSheetStack.Screen name="Menu" component={Menu} />
-      <OrderSheetStack.Screen name="Payment" component={Payment} />
-      <OrderSheetStack.Screen name="CheckOut" component={CheckOut} />
-    </OrderSheetStack.Navigator>
+    <OrderSheetContext.Provider value={orderSheetContext}>
+      <OrderSheetStack.Navigator headerMode="none">
+        {!order && (
+          <OrderSheetStack.Screen name="Escanear" component={QRScanner} />
+        )}
+        <OrderSheetStack.Screen name="Comanda" component={OrderSheet} />
+        <OrderSheetStack.Screen name="Menu" component={Menu} />
+        <OrderSheetStack.Screen name="Payment" component={Payment} />
+        <OrderSheetStack.Screen name="CheckOut" component={CheckOut} />
+      </OrderSheetStack.Navigator>
+    </OrderSheetContext.Provider>
   );
 }

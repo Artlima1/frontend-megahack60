@@ -1,16 +1,22 @@
-import React from 'react'
+import React, {useState} from 'react'
 
-import { Text, View, Button, Image } from 'react-native';
+import { Text, View, TouchableHighlight, Image } from 'react-native';
 
 import styles from './SearchStyle';
 
 import { MaterialIcons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons'; 
+import { Entypo } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
-import { Fontisto } from '@expo/vector-icons'; 
+import { Fontisto } from '@expo/vector-icons';
 
-export default function Search({ navigation }) {
+export default function Search({navigation}) {
+    const toNext = function(query){
+        console.log("toNext: " + query);
+        navigation.navigate('BarList', {query});
+    }
+    const [pos,setPos] = useState({});
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -28,56 +34,56 @@ export default function Search({ navigation }) {
             <View style={styles.content}>
                 <View style={styles.filters}>
                     <View>
-                        <View style={styles.innerCircle}>
+                        <TouchableHighlight style={styles.innerCircle} onPressIn={()=>{toNext('alphabetic')}}>
                             <MaterialCommunityIcons name="sort-alphabetical" size={60} color="black" />
-                        </View>
+                        </TouchableHighlight>
                         <Text style={styles.categText}>Bares A - Z</Text>
                     </View>
                     <View>
-                        <View style={styles.innerCircle}>
-                           <Entypo name="location" size={50} color="black" />
-                        </View>
+                        <TouchableHighlight style={styles.innerCircle} onPressIn={()=>{toNext('distance')}}>
+                            <Entypo name="location" size={50} color="black" />
+                        </TouchableHighlight>
                         <Text style={styles.categText}>Distância</Text>
                     </View>
                     <View>
                         <View style={styles.innerDCircle}>
-                           <FontAwesome name="dollar" size={50} color="black" />
+                            <FontAwesome name="dollar" size={50} color="black" />
                         </View>
                         <Text style={styles.categText}>Preço</Text>
                     </View>
                     <View>
                         <View style={styles.innerDCircle}>
-                           <Entypo name="thumbs-up" size={50} color="black" />
+                            <Entypo name="thumbs-up" size={50} color="black" />
                         </View>
                         <Text style={styles.categText}>Atendimento</Text>
                     </View>
                     <View>
                         <View style={styles.innerDCircle}>
-                           <MaterialCommunityIcons name="water-pump" size={50} color="black" />
+                            <MaterialCommunityIcons name="water-pump" size={50} color="black" />
                         </View>
                         <Text style={styles.categText}>Higiene</Text>
                     </View>
                     <View>
                         <View style={styles.innerDCircle}>
-                           <MaterialIcons name="star" size={60} color="black" />
+                            <MaterialIcons name="star" size={60} color="black" />
                         </View>
                         <Text style={styles.categText}>Estrelas</Text>
                     </View>
                     <View>
                         <View style={styles.innerDCircle}>
-                           <MaterialIcons name="people" size={60} color="black" />
+                            <MaterialIcons name="people" size={60} color="black" />
                         </View>
                         <Text style={styles.categText}>Lotação</Text>
                     </View>
                     <View>
                         <View style={styles.innerDCircle}>
-                           <Fontisto name="fire" size={50} color="black" />
+                            <Fontisto name="fire" size={50} color="black" />
                         </View>
                         <Text style={styles.categText}>Destaque</Text>
                     </View>
                     <View>
                         <View style={styles.innerDCircle}>
-                           <MaterialCommunityIcons name="flag-plus" size={60} color="black" />
+                            <MaterialCommunityIcons name="flag-plus" size={60} color="black" />
                         </View>
                         <Text style={styles.categText}>LGBTQ+</Text>
                     </View>
