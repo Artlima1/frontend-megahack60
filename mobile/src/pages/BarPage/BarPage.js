@@ -6,6 +6,7 @@ import {
   Image,
   TouchableHighlight,
   ScrollView,
+  SafeAreaView
 } from "react-native";
 
 import Description from "./Tabs/Description";
@@ -218,7 +219,7 @@ export default function ParPage({ navigation, route }) {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.header}>
           <View style={styles.backAndName}>
@@ -341,6 +342,6 @@ export default function ParPage({ navigation, route }) {
           {tab == "comments" && <Comments comments={comments} />}
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
