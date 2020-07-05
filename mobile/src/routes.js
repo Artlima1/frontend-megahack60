@@ -31,15 +31,25 @@ import Menu from "./pages/Menu";
 import Payment from "./pages/Payment";
 import CheckOut from "./pages/CheckOut";
 import api from "./Services/api";
+import { AsyncStorage } from "react-native";
 
 export default function Routes() {
   const [user, setUser] = useState(null);
+  useEffect(() => {
+    async function getData() {
+      const data = await AsyncStorage.getItem(`@friday:data`);
+
+      return JSON.parse(data);
+    }
+    const data = getData();
+    if (data && data !== null) setUser(data);
+  }, []);
 
   const authContext = useMemo(() => {
     return {
       signIn: (user) => {
-				setUser(user);
-				console.log(user)
+        setUser(user);
+        AsyncStorage.setItem(`@friday:data`, JSON.stringify(user));
         api.interceptors.request.use(
           (config) => {
             const token = user.accessToken;
