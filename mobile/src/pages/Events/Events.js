@@ -1,18 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import {
-  Header,
-  Text,
-  View,
-  Button,
-  SafeAreaView,
-  ScrollView,
-} from "react-native";
+import { SafeAreaView, ScrollView } from "react-native";
 import styles from "./EventsStyle.js";
-import { MaterialIcons, Ionicons } from "@expo/vector-icons";
-import { IconButton, Avatar, Card, Title, Paragraph } from "react-native-paper";
-import Stars from "react-native-stars";
-import { FlatList, TouchableHighlight } from "react-native";
 import BarList from "../../Components/Barlist";
 import api from "../../Services/api";
 
