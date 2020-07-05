@@ -58,7 +58,7 @@ export default function Profile({ navigation }) {
           title="Métodos de Pagamento"
           subtitle="Meus métodos de pagamentos"
           onPress={() => {
-            navigation.push("PaymentMethods");
+            navigation.navigate("PaymentMethods");
           }}
           icon={
             <Entypo

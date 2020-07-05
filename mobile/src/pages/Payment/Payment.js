@@ -31,6 +31,12 @@ export default function Payment({navigation}){
         </TouchableOpacity>
         );
 
+        const ChangeMethodButton = () => (
+            <TouchableOpacity  onPress={() => {navigation.push('PaymentMethods')}}>
+                <Text  style={styles.changeMethod}> Mudar metódo de pagamento </Text>
+            </TouchableOpacity>
+          );
+
     return(
         < >
         <View style={styles.container}>
@@ -52,11 +58,8 @@ export default function Payment({navigation}){
                         </Text>
                     </View>
                 </View>
-                {/* <Button> */}
-                    <Text  style={styles.changeMethod}> Mudar metódo de pagamento </Text>
-                {/* </Button>     */}
-
-                <Text style={styles.tipText}>Adicionar taxa de atendimento de: </Text>
+                <ChangeMethodButton />
+                <Text style={styles.tip}>Adicionar taxa de atendimento de: </Text>
                 <View style={styles.tipContainer}>
                     <View style={styles.coloredTipContainer} />
                     <Text style={styles.tip}>R$ 5,00</Text>

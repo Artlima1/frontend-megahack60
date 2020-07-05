@@ -86,7 +86,7 @@ export default function OrderList({ navigation }) {
           <Text style={styles.textTotal}>TOTAL: {getTotalPrice()}</Text>
         </View>
       </View>
-
+      <Button title='Ler QR' onPress={()=>{navigation.push('Escanear')}}/>
       <Button
         mode="contained"
         labelStyle={styles.labelStyle}
