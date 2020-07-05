@@ -10,12 +10,11 @@ import { Entypo } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 
-export default function Search({ navigation }) {
-  const toNext = function (query) {
-    console.log("toNext: " + query);
-    navigation.navigate("BarList", { query });
-  };
-  const [pos, setPos] = useState({});
+export default function Search({navigation}) {
+    const toNext = function(query){
+        console.log("toNext: " + query);
+        navigation.navigate('BarList', {query});
+    }
 
   return (
     <View style={styles.container}>
