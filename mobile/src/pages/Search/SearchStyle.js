@@ -55,8 +55,8 @@ export default StyleSheet.create({
         justifyContent: 'center',
     },
     innerCircle: {
-        width: 100,
-        height: 100,
+        width: 80,
+        height: 80,
         margin: 10,
         borderRadius: 100,
         backgroundColor: '#ffff',
@@ -64,8 +64,8 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     innerDCircle: {
-        width: 100,
-        height: 100,
+        width: 80,
+        height: 80,
         margin: 10,
         borderRadius: 100,
         opacity: 0.3,

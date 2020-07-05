@@ -7,16 +7,28 @@ import styles from "./LoginStyle.js";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import TextInput from "../../Components/TextInput";
+import api from "../../Services/api";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [error, setError] = useState();
 
   const { signIn } = useContext(AuthContext);
-
+  async function login() {
+    try {
+      const response = await api.post("session", { email, password });
+      console.log(response);
+      signIn(response.data);
+    } catch (error) {
+      console.log(error);
+      setError("Credenciais inválidas");
+    }
+  }
   return (
     <KeyboardAwareScrollView
       contentContainerStyle={styles.main}
+      keyboardShouldPersistTaps={"handled"}
     >
       <ImageBackground
         source={require("../../images/login.png")}
@@ -34,21 +46,30 @@ export default function Login({ navigation }) {
             style={styles.inputField}
             label="E-mail"
             value={email}
-            onChangeText={(email) => setEmail(email)}
+            onChangeText={(email) => {
+              setEmail(email);
+              setError();
+            }}
+            error={error}
+            errorMessage={error}
           />
           <TextInput
             style={styles.inputField}
             label="Senha"
             value={password}
-            onChangeText={(password) => setPassword(password)}
+            onChangeText={(password) => {
+              setPassword(password);
+              setError();
+            }}
             secureTextEntry={true}
             textContentType="password"
             autoCompleteType="password"
+            error={error}
+            errorMessage={error}
           />
-
           <Button
             mode="contained"
-            onPress={() => signIn("Arthur")}
+            onPress={() => login()}
             style={styles.button}
           >
             Entrar
