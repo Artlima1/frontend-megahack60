@@ -12,7 +12,7 @@ import ModalContent from './Components/ModalContent'
 
 
 export default function Menu({navigation, route}){
-    const { bar_id } = route.params
+    const { bar_id, bar } = route.params
     const [products, setProducts] = useState([])
     const [modalFlag, setModalFlag] = useState(false)
     const [selectedProduct, setSelectedProduct] = useState()
