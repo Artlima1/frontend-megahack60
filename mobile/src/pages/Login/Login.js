@@ -8,6 +8,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 import TextInput from "../../Components/TextInput";
 import api from "../../Services/api";
+import { color } from "react-native-reanimated";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState();
@@ -94,6 +95,7 @@ export default function Login({ navigation }) {
         >
           cadastre-se
         </Button>
+        <Text style={{color: 'white'}}>copyright © / 2020</Text>
       </ImageBackground>
     </KeyboardAwareScrollView>
   );
