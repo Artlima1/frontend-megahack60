@@ -70,7 +70,7 @@ export default function OrderList({ navigation }) {
           data={data}
           renderItem={({ item }) => <Order data={item} />}
           ItemSeparatorComponent={() => <View style={styles.line} />}
-          keyExtractor={(item, index) => index}
+          keyExtractor={(item, index) => index + ""}
           ListFooterComponent={
             <Button
               style={styles.addButton}
