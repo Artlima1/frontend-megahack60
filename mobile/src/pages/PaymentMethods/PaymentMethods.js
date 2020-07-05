@@ -1,29 +1,19 @@
 import React from 'react'
 
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import styles from "./PaymentMethodsStyle";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-import { Ionicons,FontAwesome,Entypo } from '@expo/vector-icons';
+
+import CashMethods from './Component/CashMethods'
+import CardMethods from './Component/CardMethods'
+
+import { Ionicons } from '@expo/vector-icons';
 
 const Tab = createMaterialTopTabNavigator();
 
-function CreditCard(){
-    return(
-    <View>
-        <Entypo name="credit-card" size={30} color="#FFFFFF" style={styles.cardIcon} />
-    </View>
-)};
-
-function Money(){
-    return(
-    <View>
-        <FontAwesome name="money" size={24} color="white" />
-    </View>
-)}; 
 
 export default function PaymentMethods(){
-
     const SeusPedidosButton = () => (
         <TouchableOpacity onPress={() => {navigation.push("CheckOut")}} style={styles.seusPedidosContainer}>
         <Ionicons name="md-clipboard" size={70} color="#FFFFFF"style={styles.seusPedidosIcon} />
@@ -40,20 +30,42 @@ export default function PaymentMethods(){
                 <Text style={styles.paymentMethodsTitle}>PAGAMENTO</Text>
                 <SeusPedidosButton  component={SeusPedidosButton}/>
             </View>
-            <View style={styles.grayContainer}>
-                <View style={styles.grayColor} />
+
                   <Tab.Navigator 
-                    tabBarOptions={{
-                        labelStyle: { fontSize: 12 },
-                        tabStyle: { width: 100 },
-                        style: { backgroundColor: 'powderblue' },
-                      }}>
-                      <Tab.Screen name="CreditCard" component={CreditCard} />
-                     <Tab.Screen name="Money" component={Money} />
+                        style={styles.tabContainer}
+                          screenOptions={({ route }) => ({
+                            tabBarIcon: ({ focused, color}) => {
+                              let iconName;
+                  
+                              if (route.name === 'CreditCard') {
+                                iconName = focused ? 'ios-card' : 'ios-card'
+                              } else if (route.name === 'Money') {
+                                iconName = focused 
+                                    ? "ios-cash"
+                                    : "ios-cash";
+                              }
+
+
+                              return <Ionicons name={iconName} size={26} color={color} />;
+                            },
+                          })}
+                          tabBarOptions={{
+                            activeTintColor: '#F4AA1D',
+                            inactiveTintColor: 'gray',
+                            showLabel: false,
+                            showIcon: 'true',
+                            style: {
+                                backgroundColor: 'white',
+                            },
+                          }}
+                        >
+                      <Tab.Screen name="CreditCard" component={CardMethods}  />
+                     <Tab.Screen name="Money" component={CashMethods}/>
                    </Tab.Navigator>
+                   <View style={styles.blackLine}><Image source={require("../../images/friday_1.png")} style={styles.logoCash}/></View>
             </View>
-        </View>
         </>
     )
 }
+
 
