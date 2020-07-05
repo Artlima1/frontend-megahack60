@@ -11,27 +11,99 @@ import api from "../../Services/api";
 
 export default function SignUp({ navigation }) {
   const [name, setName] = useState();
+  const [nameError, setNameError] = useState();
   const [surname, setSurname] = useState();
-  const [birthDate, setBirthDate] = useState();
+  const [surnameError, setSurnameError] = useState();
+  const [birthDate, setBirthDate] = useState(Date.now());
   const [email, setEmail] = useState();
+  const [emailError, setEmailError] = useState();
   const [password, setPassword] = useState();
+  const [passwordError, setPasswordError] = useState();
   const [showModal, setShowModal] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const { signIn } = useContext(AuthContext);
 
   async function signup() {
-    try {
-      const response = await api.post(`user`, {
-        name,
-        surname,
-        birthDate,
-        email,
-        password,
-      });
-      return response.data;
-    } catch (error) {
-      console.log(error.response.data.message);
+    if (!loading) {
+      try {
+        setLoading(true);
+        if (validateFields()) {
+          const response = await api.post(`user`, {
+            name,
+            surname,
+            birthdate: birthDate,
+            email,
+            password,
+          });
+
+          signIn(response);
+        }
+      } catch (error) {
+        console.log(error.response.data);
+        const data = error.response.data;
+        if (error.response.data.notification) {
+          setEmailError("Este email é inválido");
+        }
+      }
+
+      setLoading(false);
     }
+  }
+
+  function validateFields() {
+    if (!name) {
+      setNameError("Este campo não pode estar vazio");
+      return false;
+    }
+    if (name > 32) {
+      setNameError("Este campo não pode ter mais que 32 caracteres");
+      return false;
+    }
+    if (name < 3) {
+      setNameError("Este campo não pode ter menos que 3 caracteres");
+      return false;
+    }
+
+    if (!surname) {
+      setSurnameError("Este campo não pode estar vazio");
+      return false;
+    }
+    if (surname > 32) {
+      setSurnameError("Este campo não pode ter mais que 32 caracteres");
+      return false;
+    }
+    if (surname < 3) {
+      setSurnameError("Este campo não pode ter menos que 3 caracteres");
+      return false;
+    }
+
+    if (!email) {
+      setEmailError("Este campo não pode estar vazio");
+      return false;
+    }
+    if (email.length > 128) {
+      setEmailError("Este campo não pode ter mais que 128 caracteres");
+      return false;
+    }
+    if (email.length < 4) {
+      setEmailError("Este campo não pode ter menos que 4 caracteres");
+      return false;
+    }
+
+    if (!password) {
+      setPasswordError("Este campo não pode estar vazio");
+      return false;
+    }
+    if (password.length > 32) {
+      setPasswordError("Este campo não pode ter mais que 32 caracteres");
+      return false;
+    }
+    if (password.length < 6) {
+      setPasswordError("Este campo não pode ter menos que 6 caracteres");
+      return false;
+    }
+
+    return true;
   }
 
   function onChangeDate(event, newDate) {
@@ -72,15 +144,23 @@ export default function SignUp({ navigation }) {
               style={styles.inputField}
               label="Nome"
               value={name}
-              onChangeText={(name) => setName(name)}
-              error={true}
-              errorMessage={"aa"}
+              onChangeText={(name) => {
+                setNameError();
+                setName(name);
+              }}
+              error={nameError}
+              errorMessage={nameError}
             />
             <TextInput
               style={styles.inputField}
               label="Sobrenome"
               value={surname}
-              onChangeText={(surname) => setSurname(surname)}
+              onChangeText={(surname) => {
+                setSurnameError();
+                setSurname(surname);
+              }}
+              error={surnameError}
+              errorMessage={surnameError}
             />
 
             <TextInput
@@ -89,7 +169,6 @@ export default function SignUp({ navigation }) {
               value={getDate()}
               onPress={() => {
                 setShowModal(true);
-                f;
               }}
               editable={false}
             />
@@ -111,16 +190,26 @@ export default function SignUp({ navigation }) {
               style={styles.inputField}
               label="E-mail"
               value={email}
-              onChangeText={(email) => setEmail(email)}
+              onChangeText={(email) => {
+                setEmail(email);
+                setEmailError();
+              }}
+              error={emailError}
+              errorMessage={emailError}
             />
             <TextInput
               style={styles.inputField}
               label="Senha"
               value={password}
-              onChangeText={(password) => setPassword(password)}
+              onChangeText={(password) => {
+                setPassword(password);
+                setPasswordError();
+              }}
               secureTextEntry={true}
               textContentType="password"
               autoCompleteType="password"
+              error={passwordError}
+              errorMessage={passwordError}
             />
             <Button
               mode="contained"
@@ -128,6 +217,7 @@ export default function SignUp({ navigation }) {
                 signup();
               }}
               style={styles.button}
+              loading={loading}
             >
               Cadastrar
             </Button>
