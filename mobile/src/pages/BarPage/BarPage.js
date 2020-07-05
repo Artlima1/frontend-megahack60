@@ -230,7 +230,7 @@ export default function ParPage({ navigation, route }) {
                 navigation.pop();
               }}
               color={"#F4AA1D"}
-              size={40}
+              size={20}
               style={styles.backButton}
               labelStyle={styles.textButton}
             />

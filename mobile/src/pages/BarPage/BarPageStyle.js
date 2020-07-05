@@ -5,6 +5,7 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: "black",
   },
+  backButton: {},
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -16,10 +17,12 @@ export default StyleSheet.create({
     marginLeft: 15,
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
+    alignContent: "center",
+    height: '100%',
   },
   barName: {
-    marginLeft: 15,
-    fontSize: 40,
+    fontSize: 25,
     fontWeight: "600",
     color: "#F4AA1D",
   },
