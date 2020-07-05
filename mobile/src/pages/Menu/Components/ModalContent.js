@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import api from "../../../Services/api";
 import { Image, Text, View, TouchableHighlight, StyleSheet, ImageBackground } from "react-native";
 
 import { AntDesign } from '@expo/vector-icons';
@@ -63,7 +64,7 @@ export default function ModalContent({product, setModalFlag, navigation}){
 
     return (
         <View style={styles.container}>
-            <ImageBackground source={{uri: product.image_id}} style={styles.imgBackground}>
+            <ImageBackground source={{ uri: `https://drive.google.com/uc?id=${product.image_id}` }} style={styles.imgBackground}>
                 <AntDesign name="closecircle" size={30} color="black" style={styles.icon} onPress={()=>{setModalFlag(false)}}/>
                 <Text style={styles.productName}>{product.name}</Text>
             </ImageBackground>
