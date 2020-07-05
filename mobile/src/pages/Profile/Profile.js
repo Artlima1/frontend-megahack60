@@ -5,34 +5,19 @@ import { AntDesign, Entypo, Ionicons } from "@expo/vector-icons";
 import styles from "./ProfileStyle";
 import { Text, View, TouchableOpacity, Image } from "react-native";
 
+const ProfileButtons = ({ onPress, title, subtitle, icon }) => (
+  <TouchableOpacity onPress={onPress} style={styles.optionsButtonContainer}>
+    {icon}
+    <Text style={styles.optionsButtonText}>{title}</Text>
+    <Text style={styles.text}>{subtitle}</Text>
+  </TouchableOpacity>
+);
+
 export default function Profile({ navigation }) {
   const { signOut } = useContext(AuthContext);
-
-const User = {
-    userName: 'Tábata Silva Carneiro',
-}
-
-
-export default function Profile({navigation}){
-    const { signOut } = useContext(AuthContext)
-
-    const ProfileButtons = ({onPress, title}) => (
-        <TouchableOpacity onPress={onPress} style={styles.optionsButtonContainer}>
-                <Text style={styles.optionsButtonText}>{title}</Text>
-        </TouchableOpacity>
-);
-    return(
-        <View style={styles.container}>
-                <View style={styles.profileHeader}> 
-                    <Text style={styles.profileTitle}>PERFIL</Text>
-                </View>
-  const ProfileButtons = ({ onPress, title, subtitle, icon }) => (
-    <TouchableOpacity onPress={onPress} style={styles.optionsButtonContainer}>
-      {icon}
-      <Text style={styles.optionsButtonText}>{title}</Text>
-      <Text style={styles.text}>{subtitle}</Text>
-    </TouchableOpacity>
-  );
+  const User = {
+    userName: "Tábata Silva Carneiro",
+  };
 
   return (
     <View style={styles.container}>
@@ -44,7 +29,7 @@ export default function Profile({navigation}){
       </View>
 
       <View style={styles.userStyle}>
-        <Text style={styles.userText}>Tabata Silva Carneiro</Text>
+        <Text style={styles.userText}>{User.userName}</Text>
         <Image
           style={styles.userImage}
           source={require("../../images/userImage.png")}
