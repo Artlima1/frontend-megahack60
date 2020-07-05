@@ -90,7 +90,7 @@ export default function Profile({ navigation }) {
           title="Sair"
           subtitle="Desconectar da sua conta"
           onPress={() => {
-            navigation.push("Help");
+            signOut();
           }}
           icon={
             <Ionicons
