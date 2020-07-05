@@ -16,8 +16,8 @@ export default function Payment({navigation}){
     </TouchableOpacity>
     );
 
-    const FinalizarPagamentoButton = ({onPress}) => (
-        <TouchableOpacity onPress={onPress} style={styles.finalizarPagamentoContainer}>
+    const FinalizarPagamentoButton = () => (
+        <TouchableOpacity onPress={()=>{navigation.navigate('CheckOut')}} style={styles.finalizarPagamentoContainer}>
              <Text style={styles.finalizarPagamentoText}>PAGAR</Text>
         </TouchableOpacity>
         );
@@ -47,10 +47,10 @@ export default function Payment({navigation}){
                     <Text  style={styles.changeMethod}> Mudar metódo de pagamento </Text>
                 {/* </Button>     */}
 
-                <Text style={styles.tip}>Adicionar taxa de atendimento de: </Text>
+                <Text style={styles.tipText}>Adicionar taxa de atendimento de: </Text>
                 <View style={styles.tipContainer}>
                     <View style={styles.coloredTipContainer} />
-                    <Text style={styles.tipText}>R$ 5,00</Text>
+                    <Text style={styles.tip}>R$ 5,00</Text>
                 </View>
                 <View><FinalizarPagamentoButton title='Finzalizar Pagamento' /></View>
             </View>

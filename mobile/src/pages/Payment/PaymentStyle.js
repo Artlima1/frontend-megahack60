@@ -38,6 +38,7 @@ export default StyleSheet.create({
         width: 250,
         borderRadius: 10,
         alignSelf: 'center',
+        marginTop: 140
     },
     finalizarPagamentoText: {
         color: '#FFFFFF',
@@ -49,7 +50,6 @@ export default StyleSheet.create({
     grayContainer: {
         borderRadius: 12,
         alignSelf: 'center',
-        justifyContent: 'space-around',
         marginTop: 40,
         width: 370,
         height: 480,
@@ -68,18 +68,50 @@ export default StyleSheet.create({
         fontSize: 25,
         fontWeight: 'bold',
         marginLeft: 50,
-        marginTop: 10
+        marginTop: 10,
+        top: 23
     },
     totalNumber: {
         alignSelf: 'center',
         color: '#FFFFFF',
-        fontSize: 50,
+        fontSize: 60,
         fontWeight: 'bold',
+        top: 15
+    },
+    tipText: {
+        alignSelf: 'center',
+        color: '#FFFFFF',
+        fontSize: 17,
+        bottom: 25
+    },
+    tipContainer: {
+        width: 150,
+        height: 60,
+        alignItems: 'center',
+        alignSelf: 'center',
+    },
+    coloredTipContainer: {
+        opacity: 0.5,
+        borderRadius: 8,
+        width: 150,
+        height: 60,
+        backgroundColor: '#FFFFFF',
+        bottom: 20
+    },
+    tip: {
+        alignSelf: 'center',
+        color: '#FFFFFF',
+        fontSize: 30,
+        fontWeight: 'bold',
+        position: 'absolute',
+        bottom: 30
     },
     cardLine: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+        top: 200,
+        right: 10 
     },
     cardLineContainer: {
         flexDirection: 'column',
@@ -100,34 +132,11 @@ export default StyleSheet.create({
     },
     changeMethod: {
         alignSelf: 'center',
-        fontSize: 10
-,        fontWeight: 'bold',
+        fontSize: 10,
+        fontWeight: 'bold',
+        top: 200,
         color: '#FFFFFF',
         textDecorationLine: 'underline',
+        left: 10
     },
-    tip: {
-        alignSelf: 'center',
-        color: '#FFFFFF',
-        fontSize: 10,
-    },
-    tipContainer: {
-        width: 150,
-        height: 60,
-        alignItems: 'center',
-        alignSelf: 'center',
-    },
-    coloredTipContainer: {
-        opacity: 0.5,
-        borderRadius: 4,
-        width: 150,
-        height: 60,
-        backgroundColor: '#FFFFFF',
-    },
-    tipText: {
-        alignSelf: 'center',
-        color: '#FFFFFF',
-        fontSize: 30,
-        fontWeight: 'bold',
-        position: 'absolute',
-    }
 });
