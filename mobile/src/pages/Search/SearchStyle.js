@@ -6,7 +6,7 @@ export default StyleSheet.create({
     },
     header: {
         flex: 5,
-        backgroundColor: '#455056',
+        backgroundColor: '#1d1d1d',
     },
     headerTop: {
         flex: 3,
@@ -42,7 +42,7 @@ export default StyleSheet.create({
         flex: 15,
         backgroundColor: '#000000',
         padding: 20,
-        paddingVertical: 45,
+        paddingVertical: 35,
     },
     filters: {
         padding: 5,
