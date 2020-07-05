@@ -5,8 +5,9 @@ export default StyleSheet.create({
     flexGrow: 1,
   },
   image: {
-    minHeight: "100%",
-    resizeMode: "stretch",
+    resizeMode: "cover",
+    alignSelf: "flex-end",
+    minWidth: "100%",
   },
   container: {
     flexGrow: 1,
