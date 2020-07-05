@@ -52,7 +52,8 @@ export default function Routes() {
       ...DefaultTheme.colors,
       primary: "#F4AA1D",
       card: "#1D1D1D",
-      text: "white"
+      text: "white",
+      border: "#131313"
     },
   };
 
