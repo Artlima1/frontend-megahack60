@@ -10,7 +10,7 @@ export default StyleSheet.create({
         backgroundColor: '#1D1D1D',
 
     },
-    content: {
+    contento: {
         flex: 1,
         resizeMode: 'stretch',
         width: null,
@@ -19,8 +19,14 @@ export default StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#000',
     },
+    content: {
+        flex: 1,
+        maxHeight: 300,
+        marginTop: 30,
+    },
     legendCard:{
         flexDirection: 'row',
+        maxHeight: 35,
         
     },
     stars:{
@@ -29,9 +35,7 @@ export default StyleSheet.create({
     },
     iconButton: {
         position: "absolute",
-        zIndex: 100,
-        top: 5,
-        left: 300,
+        left: 280,
     },
     peopleIcon: {
         flexDirection: 'column',
@@ -40,7 +44,8 @@ export default StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#000',
-        alignItems: 'center',
-        justifyContent: 'center',
+
+        // alignItems: 'center',
+        // justifyContent: 'center',
     },
 });
