@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import AuthContext from "./context";
+import OrderSheetContext from "./contextOrderSheet";
 
 import {
   NavigationContainer,
@@ -214,13 +215,30 @@ function ProfileRouter() {
 }
 
 function OrderSheetRouter() {
+  const [order, setOrder] = useState();
+
+  const orderSheetContext = useMemo(() => {
+    return {
+      setOderSheet: (OrderSheet) => {
+        setOrder(OrderSheet);
+      },
+      getOrder: () => {
+        return order;
+      },
+    };
+  }, []);
+
   return (
-    <OrderSheetStack.Navigator headerMode="none">
-      <OrderSheetStack.Screen name="Escanear" component={QRScanner} />
-      <OrderSheetStack.Screen name="Comanda" component={OrderSheet} />
-      <OrderSheetStack.Screen name="Menu" component={Menu} />
-      <OrderSheetStack.Screen name="Payment" component={Payment} />
-      <OrderSheetStack.Screen name="CheckOut" component={CheckOut} />
-    </OrderSheetStack.Navigator>
+    <OrderSheetContext.Provider value={orderSheetContext}>
+      <OrderSheetStack.Navigator headerMode="none">
+        {!order && (
+          <OrderSheetStack.Screen name="Escanear" component={QRScanner} />
+        )}
+        <OrderSheetStack.Screen name="Comanda" component={OrderSheet} />
+        <OrderSheetStack.Screen name="Menu" component={Menu} />
+        <OrderSheetStack.Screen name="Payment" component={Payment} />
+        <OrderSheetStack.Screen name="CheckOut" component={CheckOut} />
+      </OrderSheetStack.Navigator>
+    </OrderSheetContext.Provider>
   );
 }

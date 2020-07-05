@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./OrderSheetStyle";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { Button } from "react-native-paper";
 import { FlatList } from "react-native-gesture-handler";
+import ContextOrderSheet from "../../contextOrderSheet";
 
 function Order({ data }) {
   const total = data.price * data.amount;
@@ -32,7 +33,9 @@ function Order({ data }) {
 }
 
 export default function OrderList({ navigation }) {
-  const [tableNumber, setTableNumber] = useState(1);
+  const { getOrder } = useContext(ContextOrderSheet);
+  const orderSheet = getOrder();
+
   const [data, setData] = useState([
     { amount: 1, name: "teste", price: 10 },
     { amount: 1, name: "teste", price: 10 },
@@ -56,7 +59,9 @@ export default function OrderList({ navigation }) {
         <Image height={70} width={70} style={styles.barImage}></Image>
         <View style={styles.headerTextView}>
           <Text style={styles.titleText}>COMANDA</Text>
-          <Text style={styles.subTitleText}>Mesa {tableNumber}</Text>
+          <Text style={styles.subTitleText}>
+            Mesa {orderSheet.table_number}
+          </Text>
         </View>
       </View>
       <View style={styles.surface}>
@@ -77,7 +82,9 @@ export default function OrderList({ navigation }) {
               mode={"contained"}
               icon={"plus-circle"}
               color={"#2D9235"}
-              onPress={()=>{navigation.push('Menu')}}
+              onPress={() => {
+                navigation.push("Menu");
+              }}
             >
               Adicionar mais itens
             </Button>
@@ -87,7 +94,12 @@ export default function OrderList({ navigation }) {
           <Text style={styles.textTotal}>TOTAL: {getTotalPrice()}</Text>
         </View>
       </View>
-      <Button title='Ler QR' onPress={()=>{navigation.push('Escanear')}}/>
+      <Button
+        title="Ler QR"
+        onPress={() => {
+          navigation.push("Escanear");
+        }}
+      />
       <Button
         mode="contained"
         labelStyle={styles.labelStyle}

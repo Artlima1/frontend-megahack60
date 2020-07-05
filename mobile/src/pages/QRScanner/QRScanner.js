@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { IconButton, Button } from "react-native-paper";
@@ -6,12 +6,15 @@ import Modal from "react-native-modal";
 import TextInput from "../../Components/TextInput";
 import api from "../../Services/api";
 // import styles from './QRScannerStyle';
+import ContextOrderSheet from "../../contextOrderSheet";
 
 export default function QRScanner() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
   const [code, setCode] = useState();
+
+  const { setOderSheet } = useContext(ContextOrderSheet);
 
   useEffect(() => {
     (async () => {
@@ -34,8 +37,7 @@ export default function QRScanner() {
       alert("Mesa encontrada com sucesso!");
 
       const response2 = await api.get(`order_sheets_id/${response.data}`);
-      console.log(response2.data);
-
+      setOderSheet(response2.data);
     } catch (error) {
       console.log(error.response);
       alert("Mesa não encontrada");
