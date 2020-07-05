@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
 import AuthContext from "../../context";
 
-import { AntDesign, Entypo, Ionicons, Foundation } from "@expo/vector-icons";
+import { AntDesign, Entypo, Ionicons } from "@expo/vector-icons";
 import styles from "./ProfileStyle";
-
-import { Text, View, Button, TouchableOpacity, Image } from "react-native";
+import { Text, View, TouchableOpacity, Image } from "react-native";
 
 export default function Profile({ navigation }) {
   const { signOut } = useContext(AuthContext);
