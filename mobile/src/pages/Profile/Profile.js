@@ -14,11 +14,8 @@ const ProfileButtons = ({ onPress, title, subtitle, icon }) => (
 );
 
 export default function Profile({ navigation }) {
-  const { signOut } = useContext(AuthContext);
-  const User = {
-    userName: "Tábata Silva Carneiro",
-  };
-
+  const { signOut, getData } = useContext(AuthContext);
+  const User = getData().user;
   return (
     <View style={styles.container}>
       <View style={styles.profileHeader}>
@@ -29,7 +26,9 @@ export default function Profile({ navigation }) {
       </View>
 
       <View style={styles.userStyle}>
-        <Text style={styles.userText}>{User.userName}</Text>
+        <Text style={styles.userText}>
+          {User.name} {User.surname}
+        </Text>
         <Image
           style={styles.userImage}
           source={require("../../images/userImage.png")}

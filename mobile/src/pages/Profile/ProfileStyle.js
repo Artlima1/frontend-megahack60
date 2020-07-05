@@ -75,13 +75,19 @@ export default StyleSheet.create({
     backgroundColor: "#FB0C06",
     height: 33,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-end",
     marginBottom: 20,
+  },
+  userImage: {
+    position: "absolute",
+    right: 16,
   },
   userText: {
     color: "#FFFFFF",
     fontSize: 25,
     fontWeight: "bold",
+    marginLeft: 130,
+    textTransform: "capitalize",
   },
   logoContainer: {
     alignItems: "center",

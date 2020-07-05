@@ -84,6 +84,9 @@ export default function Routes() {
         setUser(null);
         AsyncStorage.removeItem(`@friday:data`);
       },
+      getData: () => {
+        return user;
+      },
     };
   }, []);
 
