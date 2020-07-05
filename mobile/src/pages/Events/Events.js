@@ -1,165 +1,26 @@
-import React from 'react'
+import React from "react";
 
-import { Header, Text, View, Button, SafeAreaView, ScrollView } from 'react-native';
+import {
+  Header,
+  Text,
+  View,
+  Button,
+  SafeAreaView,
+  ScrollView,
+} from "react-native";
 import styles from "./EventsStyle.js";
-import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import { IconButton, Avatar, Card, Title, Paragraph } from "react-native-paper";
-import Stars from 'react-native-stars';
+import Stars from "react-native-stars";
+import { FlatList, TouchableHighlight } from "react-native";
+import BarList from "../../Components/Barlist";
 
 export default function Events({ navigation }) {
-    return (
-        <SafeAreaView style={styles.container}>
-            <ScrollView>
-                <View style={styles.contento}>
-                    <View style={styles.header}>
-                        <View style={styles.button}>
-                            <MaterialIcons
-                                name="place"
-                                size={30}
-                                color="white" />
-                            <Button color="#ffff"
-                                alignSelf='flex-start'
-                                size='40'
-                                title='Perto de você'
-                                onPress={() => { }} />
-                            <IconButton
-                                style={styles.iconButton}
-                                icon="qrcode-scan"
-                                color="white"
-                                size={35}
-                                onPress={() => { }}
-                            />
-                        </View>
-                        <Text style={{
-                            color: '#fff',
-                            textAlign: 'center',
-                            fontSize: 35,
-                            fontWeight: "bold"
-                        }}>{'\n'}PROMOÇÕES</Text>
-                    </View>
-                    <View style={styles.content}>
-                        <Card>
-                            <Card.Title title="The House" />
-                            {/* style={{marginBottom:90, marginTop: 100}} */}
-                            <Card.Cover source={require("../../images/promo.png")} />
-                            <Card.Content>
-                                <View style={styles.legendCard}>
-                                    <View style={styles.stars}>
-                                        <Stars
-
-                                            display={3.67}
-                                            spacing={8}
-                                            count={5}
-                                            starSize={25}
-                                            fullStar={require('../../images/starFilled.png')}
-                                            emptyStar={require('../../images/starEmpty.png')}
-                                        />
-                                    </View>
-                                    <View style={styles.peopleIcon}>
-                                        <Ionicons
-                                            name="ios-people"
-                                            size={40}
-                                            color="#757575" />
-                                        <Text style={{ color: '#757575', fontWeight: "bold", fontSize: 10 }}>84 pessoas</Text>
-                                    </View>
-                                </View>
-                            </Card.Content>
-                        </Card>
-                        <Button size="300" color="#ffff" title='Ver Mais' onPress={() => { navigation.push('BarPage') }} />
-                    </View>
-                    <View style={styles.content}>
-                        <Card>
-                            <Card.Title title="The House" />
-                            {/* style={{marginBottom:90, marginTop: 100}} */}
-                            <Card.Cover source={require("../../images/promo.png")} />
-                            <Card.Content>
-                                <View style={styles.legendCard}>
-                                    <View style={styles.stars}>
-                                        <Stars
-
-                                            display={3.67}
-                                            spacing={8}
-                                            count={5}
-                                            starSize={25}
-                                            fullStar={require('../../images/starFilled.png')}
-                                            emptyStar={require('../../images/starEmpty.png')}
-                                        />
-                                    </View>
-                                    <View style={styles.peopleIcon}>
-                                        <Ionicons
-                                            name="ios-people"
-                                            size={40}
-                                            color="#757575" />
-                                        <Text style={{ color: '#757575', fontWeight: "bold", fontSize: 10 }}>84 pessoas</Text>
-                                    </View>
-                                </View>
-                            </Card.Content>
-                        </Card>
-                        <Button size="300" color="#ffff" title='Ver Mais' onPress={() => { navigation.push('BarPage') }} />
-                    </View>
-                    <View style={styles.content}>
-                        <Card>
-                            <Card.Title title="The House" />
-                            {/* style={{marginBottom:90, marginTop: 100}} */}
-                            <Card.Cover source={require("../../images/promo.png")} />
-                            <Card.Content>
-                                <View style={styles.legendCard}>
-                                    <View style={styles.stars}>
-                                        <Stars
-
-                                            display={3.67}
-                                            spacing={8}
-                                            count={5}
-                                            starSize={25}
-                                            fullStar={require('../../images/starFilled.png')}
-                                            emptyStar={require('../../images/starEmpty.png')}
-                                        />
-                                    </View>
-                                    <View style={styles.peopleIcon}>
-                                        <Ionicons
-                                            name="ios-people"
-                                            size={40}
-                                            color="#757575" />
-                                        <Text style={{ color: '#757575', fontWeight: "bold", fontSize: 10 }}>84 pessoas</Text>
-                                    </View>
-                                </View>
-                            </Card.Content>
-                        </Card>
-                        <Button size="300" color="#ffff" title='Ver Mais' onPress={() => { navigation.push('BarPage') }} />
-                    </View>
-                    <View style={styles.content}>
-                        <Card>
-                            <Card.Title title="The House" />
-                            {/* style={{marginBottom:90, marginTop: 100}} */}
-                            <Card.Cover source={require("../../images/promo.png")} />
-                            <Card.Content>
-                                <View style={styles.legendCard}>
-                                    <View style={styles.stars}>
-                                        <Stars
-
-                                            display={3.67}
-                                            spacing={8}
-                                            count={5}
-                                            starSize={25}
-                                            fullStar={require('../../images/starFilled.png')}
-                                            emptyStar={require('../../images/starEmpty.png')}
-                                        />
-                                    </View>
-                                    <View style={styles.peopleIcon}>
-                                        <Ionicons
-                                            name="ios-people"
-                                            size={40}
-                                            color="#757575" />
-                                        <Text style={{ color: '#757575', fontWeight: "bold", fontSize: 10 }}>84 pessoas</Text>
-                                    </View>
-                                </View>
-                            </Card.Content>
-                        </Card>
-                        <Button size="300" color="#ffff" title='Ver Mais' onPress={() => { navigation.push('BarPage') }} />
-                    </View>
-                </View >
-            </ScrollView>
-        </SafeAreaView>
-    );
-};
-
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <BarList bars={[{ name: "a" }, { name: "b" }]} />
+      </ScrollView>
+    </SafeAreaView>
+  );
+}

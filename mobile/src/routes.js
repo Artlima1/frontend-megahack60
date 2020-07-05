@@ -32,6 +32,7 @@ import Payment from "./pages/Payment";
 import CheckOut from "./pages/CheckOut";
 import api from "./Services/api";
 import { AsyncStorage } from "react-native";
+import { IconButton } from "react-native-paper";
 
 export default function Routes() {
   const [user, setUser] = useState(null);
@@ -42,6 +43,7 @@ export default function Routes() {
       JSON.parse(data);
       if (data && data !== null) setUser(data);
     }
+    getData();
   }, []);
 
   const authContext = useMemo(() => {
@@ -143,9 +145,29 @@ function HomeRouter() {
 
 function EventsRouter() {
   return (
-    <EventsStack.Navigator headerMode="none">
-      <EventsStack.Screen name="Events" component={Events} />
-      <EventsStack.Screen name="BarPage" component={BarPage} />
+    <EventsStack.Navigator>
+      <EventsStack.Screen
+        name="Events"
+        options={{
+          title: "Eventos",
+          headerRight: (props) => {
+            return (
+              <IconButton
+                icon="qrcode-scan"
+                color="white"
+                size={35}
+                onPress={() => {}}
+              />
+            );
+          },
+        }}
+        component={Events}
+      />
+      <EventsStack.Screen
+        name="BarPage"
+        options={{ headerShown: false }}
+        component={BarPage}
+      />
     </EventsStack.Navigator>
   );
 }
