@@ -15,7 +15,6 @@ export default function Search({navigation}) {
         console.log("toNext: " + query);
         navigation.navigate('BarList', {query});
     }
-    const [pos,setPos] = useState({});
 
     return (
         <View style={styles.container}>
