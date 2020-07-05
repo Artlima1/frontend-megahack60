@@ -30,6 +30,7 @@ import OrderSheet from "./pages/OrderSheet";
 import Menu from "./pages/Menu";
 import Payment from "./pages/Payment";
 import CheckOut from "./pages/CheckOut";
+import api from "./Services/api";
 
 export default function Routes() {
   const [user, setUser] = useState(null);
@@ -38,6 +39,16 @@ export default function Routes() {
     return {
       signIn: (user) => {
         setUser(user);
+        api.interceptors.request.use(
+          (config) => {
+            const token = user.token;
+            if (token && token !== " ")
+              config.headers.authorization = `Bearer ${token}`;
+
+            return config;
+          },
+          (error) => Promise.reject(error)
+        );
       },
       signOut: () => {
         setUser(null);
@@ -53,7 +64,7 @@ export default function Routes() {
       primary: "#F4AA1D",
       card: "#1D1D1D",
       text: "white",
-      border: "#131313"
+      border: "#131313",
     },
   };
 

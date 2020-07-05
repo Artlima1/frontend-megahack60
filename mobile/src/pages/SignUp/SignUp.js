@@ -7,6 +7,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 
 import TextInput from "../../Components/TextInput";
 import styles from "./SignUpStyle";
+import api from "../../Services/api";
 
 export default function SignUp({ navigation }) {
   const [name, setName] = useState();
@@ -17,6 +18,21 @@ export default function SignUp({ navigation }) {
   const [showModal, setShowModal] = useState(false);
 
   const { signIn } = useContext(AuthContext);
+
+  async function signup() {
+    try {
+      const response = await api.post(`user`, {
+        name,
+        surname,
+        birthDate,
+        email,
+        password,
+      });
+      return response.data;
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  }
 
   function onChangeDate(event, newDate) {
     setShowModal(false);
@@ -57,6 +73,8 @@ export default function SignUp({ navigation }) {
               label="Nome"
               value={name}
               onChangeText={(name) => setName(name)}
+              error={true}
+              errorMessage={"aa"}
             />
             <TextInput
               style={styles.inputField}
@@ -71,6 +89,7 @@ export default function SignUp({ navigation }) {
               value={getDate()}
               onPress={() => {
                 setShowModal(true);
+                f;
               }}
               editable={false}
             />
@@ -103,7 +122,13 @@ export default function SignUp({ navigation }) {
               textContentType="password"
               autoCompleteType="password"
             />
-            <Button mode="contained" onPress={() => {}} style={styles.button}>
+            <Button
+              mode="contained"
+              onPress={() => {
+                signup();
+              }}
+              style={styles.button}
+            >
               Cadastrar
             </Button>
 
