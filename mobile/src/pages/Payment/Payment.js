@@ -1,12 +1,14 @@
 import React from 'react'
 import styles from './PaymentStyle'
 
+import { useNavigation } from '@react-navigation/native';
 import { Ionicons, Entypo } from '@expo/vector-icons';
-import {Text, View, TouchableOpacity, Button } from 'react-native';
+import {Text, View, TouchableOpacity} from 'react-native';
 
 
-export default function Payment({navigation}){
 
+export default function Payment(){
+    const navigation = useNavigation();
     const SeusPedidosButton = () => (
     <TouchableOpacity onPress={()=>{navigation.pop()}} style={styles.seusPedidosContainer}>
         <Ionicons name="md-clipboard" size={70} color="#FFFFFF"style={styles.seusPedidosIcon} />
@@ -22,11 +24,11 @@ export default function Payment({navigation}){
         </TouchableOpacity>
         );
 
-        const ChangeMethodButton = () => (
-            <TouchableOpacity  onPress={() => {navigation.push('PaymentMethods')}}>
-                <Text  style={styles.changeMethod}> Mudar metódo de pagamento </Text>
-            </TouchableOpacity>
-          );
+    const ChangeMethodButton = () => (
+        <TouchableOpacity  onPress={() => {navigation.push('PaymentMethods')}}>
+            <Text  style={styles.changeMethod}> Mudar metódo de pagamento </Text>
+        </TouchableOpacity>
+        );
 
     return(
         < >
