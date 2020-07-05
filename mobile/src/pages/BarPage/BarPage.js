@@ -5,8 +5,8 @@ import {
   View,
   Image,
   TouchableHighlight,
-  SafeAreaView,
   ScrollView,
+  SafeAreaView
 } from "react-native";
 
 import Description from "./Tabs/Description";

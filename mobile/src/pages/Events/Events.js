@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { SafeAreaView, ScrollView } from "react-native";
+import { ScrollView, SafeAreaView } from "react-native";
 import styles from "./EventsStyle.js";
 import BarList from "../../Components/Barlist";
 import api from "../../Services/api";

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { StyleSheet, Text, View, Button, ScrollView, SafeAreaView } from 'react-native';
+import { SafeAreaView, ScrollView } from 'react-native';
 
 import _BarList from '../../Components/Barlist';
 import api from '../../Services/api';
