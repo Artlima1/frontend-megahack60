@@ -5,6 +5,15 @@ import { Ionicons, Entypo } from '@expo/vector-icons';
 import {Text, View, TouchableOpacity, Button } from 'react-native';
 
 
+const Values = {
+    totalValue : '100,00',
+    tipValue : '5,00',
+}
+
+const CreditCard = {
+    last3numbers : '236'
+}
+
 export default function Payment({navigation}){
 
     const SeusPedidosButton = () => (
@@ -33,7 +42,7 @@ export default function Payment({navigation}){
                 <View style={styles.grayColor} />
                 <Text style={styles.totalText}> TOTAL: </Text>
                 <Text style={styles.totalNumber}>
-                    R$ 100,00
+                    {Values.totalValue}
                 </Text>
                 <View style={styles.cardLine}>
                     <Entypo name="credit-card" size={30} color="#FFFFFF" style={styles.cardIcon} />

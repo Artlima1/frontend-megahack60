@@ -6,17 +6,19 @@ import styles from './ProfileStyle'
 
 import { Text, View, Button, TouchableOpacity, Image } from 'react-native';
 
+const User = {
+    userName: 'Tábata Silva Carneiro',
+}
+
 
 export default function Profile({navigation}){
     const { signOut } = useContext(AuthContext)
 
-const ProfileButtons = ({onPress, title}) => (
-    <TouchableOpacity onPress={onPress} style={styles.optionsButtonContainer}>
-            <Text style={styles.optionsButtonText}>{title}</Text>
-    </TouchableOpacity>
+    const ProfileButtons = ({onPress, title}) => (
+        <TouchableOpacity onPress={onPress} style={styles.optionsButtonContainer}>
+                <Text style={styles.optionsButtonText}>{title}</Text>
+        </TouchableOpacity>
 );
-
-
     return(
         <View style={styles.container}>
                 <View style={styles.profileHeader}> 
@@ -24,7 +26,7 @@ const ProfileButtons = ({onPress, title}) => (
                 </View>
 
                 <View style={styles.userStyle}>
-                    <Text style={styles.userText}>Tabata Silva Carneiro</Text>
+                <Text style={styles.userText}> {User.userName} </Text>
                     <Image style={styles.userImage} source={require('../../images/userImage.png')} />
                 </View>
 
