@@ -240,11 +240,28 @@ function SeachRouter() {
 
 function ProfileRouter() {
   return (
-    <ProfileStack.Navigator headerMode="none">
-      <ProfileStack.Screen name="Perfil" component={Profile} />
-      <ProfileStack.Screen name="FavBars" component={FavBars} />
-      <ProfileStack.Screen name="PaymentMethods" component={PaymentMethods} />
-      <ProfileStack.Screen name="Help" component={Help} />
+    <ProfileStack.Navigator>
+      <ProfileStack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name="Perfil"
+        component={Profile}
+      />
+      <ProfileStack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name="FavBars"
+        component={FavBars}
+      />
+      <ProfileStack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name="Help"
+        component={Help}
+      />
     </ProfileStack.Navigator>
   );
 }
@@ -271,13 +288,16 @@ function OrderSheetRouter() {
         )}
         <OrderSheetStack.Screen name="Comanda" component={OrderSheet} />
         <OrderSheetStack.Screen name="Menu" component={Menu} />
-        <OrderSheetStack.Screen name="Payment" component={Payment} />
         <OrderSheetStack.Screen name="CheckOut" component={CheckOut} />
-        <OrderSheetStack.Screen name="PaymentMethods" component={PaymentMethods} />
+        <OrderSheetStack.Screen
+          name="PaymentMethods"
+          options={{
+            title: "Métodos de pagamento",
+            headerShown: true,
+          }}
+          component={PaymentMethods}
+        />
       </OrderSheetStack.Navigator>
     </OrderSheetContext.Provider>
-      
   );
 }
-
-

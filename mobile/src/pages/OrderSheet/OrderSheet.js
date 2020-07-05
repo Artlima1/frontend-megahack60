@@ -39,11 +39,7 @@ export default function OrderList({ navigation, route }) {
 
   if (!orderSheet) orderSheet = {};
 
-  const [data, setData] = useState([
-    { amount: 1, name: "teste", price: 10 },
-    { amount: 1, name: "teste", price: 10 },
-    { amount: 1, name: "testeaaaaaaaaaaaaaaaaaaaaaaa", price: 10 },
-  ]);
+  const [data, setData] = useState([]);
 
   let totalSum = 0;
 
@@ -122,7 +118,7 @@ export default function OrderList({ navigation, route }) {
         labelStyle={styles.labelStyle}
         style={styles.button}
         onPress={() => {
-          navigation.push("Payment");
+          navigation.navigate("PaymentMethods", { orderSheet });
         }}
       >
         Pagar Agora

@@ -7,13 +7,14 @@ import TextInput from "../../Components/TextInput";
 import api from "../../Services/api";
 // import styles from './QRScannerStyle';
 import ContextOrderSheet from "../../contextOrderSheet";
+import { useNavigation } from "@react-navigation/native";
 
 export default function QRScanner() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [modal, setModal] = useState(false);
   const [code, setCode] = useState();
-
+  const navigation = useNavigation();
   const { setOderSheet } = useContext(ContextOrderSheet);
 
   useEffect(() => {
@@ -35,9 +36,9 @@ export default function QRScanner() {
         tables_id: data,
       });
       alert("Mesa encontrada com sucesso!");
-
       const response2 = await api.get(`order_sheets_id/${response.data}`);
       setOderSheet(response2.data);
+      navigation.navigate("Comanda", {update: '!'});
     } catch (error) {
       console.log(error);
       console.log(error.response);
