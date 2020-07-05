@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { SafeAreaView, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 import styles from "./EventsStyle.js";
 import BarList from "../../Components/Barlist";
 import api from "../../Services/api";
@@ -15,10 +15,10 @@ export default function Events({ navigation }) {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView>
         <BarList bars={data} />
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }

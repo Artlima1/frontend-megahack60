@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { StyleSheet, Text, View, Button, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 
 import _BarList from '../../Components/Barlist';
 import api from '../../Services/api';
@@ -46,10 +46,10 @@ export default function BarList({ navigation, route }) {
     }, []);
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <ScrollView>
                 <_BarList bars={data} />
             </ScrollView>
-        </SafeAreaView>
+        </View>
     )
 }
