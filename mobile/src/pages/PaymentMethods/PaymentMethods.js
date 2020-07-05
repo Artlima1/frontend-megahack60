@@ -24,6 +24,19 @@ function Money(){
 
 export default function PaymentMethods(){
 
+    const CadastrarCartao = () => (
+        <TouchableOpacity onPress={()=>{navigation.navigate('Payment')}} style={styles.buttonCadastrarCartao}>
+             <Text style={styles.finalizarPagamentoText}>Cadastrar cartão</Text>
+        </TouchableOpacity>
+        );
+    
+    const PagarDinheiro = () => (
+        <TouchableOpacity onPress={()=>{navigation.navigate('CheckOut')}} style={styles.buttonPagarDinheiro}>
+             <Text style={styles.finalizarPagamentoText}>Cadastrar cartão</Text>
+        </TouchableOpacity>
+        );
+    
+
     const SeusPedidosButton = () => (
         <TouchableOpacity onPress={() => {navigation.push("CheckOut")}} style={styles.seusPedidosContainer}>
         <Ionicons name="md-clipboard" size={70} color="#FFFFFF"style={styles.seusPedidosIcon} />
@@ -51,9 +64,12 @@ export default function PaymentMethods(){
                       <Tab.Screen name="CreditCard" component={CreditCard} />
                      <Tab.Screen name="Money" component={Money} />
                    </Tab.Navigator>
+                   <PagarDinheiro />
+                   <CadastrarCartao />
             </View>
         </View>
         </>
     )
 }
+
 
