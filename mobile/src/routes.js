@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useMemo } from 'react'
-import AuthContext from './context'
+import React, { useState, useEffect, useMemo } from "react";
+import AuthContext from "./context";
 
-import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const LoginStack = createStackNavigator();
 const MenuBottomTab = createBottomTabNavigator();
@@ -13,118 +14,161 @@ const SearchStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
 const OrderSheetStack = createStackNavigator();
 
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
+import ForgotPassword from "./pages/ForgotPassword";
+import Events from "./pages/Events";
+import BarPage from "./pages/BarPage";
+import Search from "./pages/Search";
+import BarList from "./pages/BarList";
+import Profile from "./pages/Profile";
+import FavBars from "./pages/FavBars";
+import PaymentMethods from "./pages/PaymentMethods";
+import Help from "./pages/Help";
+import QRScanner from "./pages/QRScanner";
+import OrderSheet from "./pages/OrderSheet";
+import Menu from "./pages/Menu";
+import Payment from "./pages/Payment";
+import CheckOut from "./pages/CheckOut";
+import api from "./Services/api";
 
-import Login from './pages/Login'
-import SignUp from './pages/SignUp'
-import ForgotPassword from './pages/ForgotPassword'
-import Events from './pages/Events'
-import BarPage from './pages/BarPage'
-import Search from './pages/Search'
-import BarList from './pages/BarList'
-import Profile from './pages/Profile'
-import FavBars from './pages/FavBars'
-import PaymentMethods from './pages/PaymentMethods'
-import Help from './pages/Help'
-import QRScanner from './pages/QRScanner'
-import OrderSheet from './pages/OrderSheet'
-import Menu from './pages/Menu'
-import Payment from './pages/Payment'
-import CheckOut from './pages/CheckOut'
+export default function Routes() {
+  const [user, setUser] = useState(null);
 
+  const authContext = useMemo(() => {
+    return {
+      signIn: (user) => {
+				setUser(user);
+				console.log(user)
+        api.interceptors.request.use(
+          (config) => {
+            const token = user.accessToken;
+            if (token && token !== " ")
+              config.headers.authorization = `Bearer ${token}`;
 
-export default function Routes(){
+            return config;
+          },
+          (error) => Promise.reject(error)
+        );
+      },
+      signOut: () => {
+        setUser(null);
+      },
+    };
+  }, []);
 
-    const [user, setUser] = useState(null)
+  const MyTheme = {
+    ...DefaultTheme,
+    dark: true,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: "#F4AA1D",
+      card: "#1D1D1D",
+      text: "white",
+      border: "#131313",
+    },
+  };
 
-    const authContext = useMemo(()=>{
-        return {
-            signIn: (user)=>{
-                setUser(user)
-            },
-            signOut: ()=>{
-                setUser(null)
-            },
-        }
-    }, [])
-
-
-    return (
-        <AuthContext.Provider value={authContext}>
-            <NavigationContainer>
-                {user? 
-                    <HomeRouter/>
-                :
-                    <LoginNavegator/>
-                }
-            </NavigationContainer>
-        </AuthContext.Provider>
-    )
+  return (
+    <AuthContext.Provider value={authContext}>
+      <NavigationContainer theme={MyTheme}>
+        {user ? <HomeRouter /> : <LoginNavegator />}
+      </NavigationContainer>
+    </AuthContext.Provider>
+  );
 }
 
-function LoginNavegator(){
-    return (
-        <LoginStack.Navigator headerMode='none'>
-
-            <LoginStack.Screen name='Login' component={Login}/>
-            <LoginStack.Screen name='SignUp' component={SignUp}/>
-            <LoginStack.Screen name='ForgotPassword' component={ForgotPassword}/>
-
-        </LoginStack.Navigator>
-    )
+function LoginNavegator() {
+  return (
+    <LoginStack.Navigator headerMode="none">
+      <LoginStack.Screen name="Login" component={Login} />
+      <LoginStack.Screen name="SignUp" component={SignUp} />
+      <LoginStack.Screen name="ForgotPassword" component={ForgotPassword} />
+    </LoginStack.Navigator>
+  );
 }
 
-function HomeRouter(){
-
-    return(
-        <MenuBottomTab.Navigator headerMode='none'>
-
-            <MenuBottomTab.Screen name='Destaques' component={EventsRouter} />
-            <MenuBottomTab.Screen name='Procurar' component={SeachRouter} />
-            <MenuBottomTab.Screen name='Perfil' component={ProfileRouter} />
-            <MenuBottomTab.Screen name='Comanda' component={OrderSheetRouter} />
-
-        </MenuBottomTab.Navigator>
-    )
+function HomeRouter() {
+  return (
+    <MenuBottomTab.Navigator headerMode="none">
+      <MenuBottomTab.Screen
+        name="Destaques"
+        options={{
+          tabBarIcon: ({ focused, color, size }) => (
+            <MaterialIcons name="store" size={size} color={color} />
+          ),
+        }}
+        component={EventsRouter}
+      />
+      <MenuBottomTab.Screen
+        name="Procurar"
+        options={{
+          tabBarIcon: ({ focused, color, size }) => (
+            <MaterialIcons name="search" size={size} color={color} />
+          ),
+        }}
+        component={SeachRouter}
+      />
+      <MenuBottomTab.Screen
+        name="Perfil"
+        options={{
+          tabBarIcon: ({ focused, color, size }) => (
+            <MaterialIcons name="account-circle" size={size} color={color} />
+          ),
+        }}
+        component={ProfileRouter}
+      />
+      <MenuBottomTab.Screen
+        name="Comanda"
+        options={{
+          tabBarIcon: ({ focused, color, size }) => (
+            <MaterialIcons name="description" size={size} color={color} />
+          ),
+        }}
+        component={OrderSheetRouter}
+      />
+    </MenuBottomTab.Navigator>
+  );
 }
 
-function EventsRouter(){
-    return(
-        <EventsStack.Navigator headerMode='none'>
-            <EventsStack.Screen name='Events' component={Events}/>
-            <EventsStack.Screen name='BarPage' component={BarPage}/>
-        </EventsStack.Navigator>
-    )
+function EventsRouter() {
+  return (
+    <EventsStack.Navigator headerMode="none">
+      <EventsStack.Screen name="Events" component={Events} />
+      <EventsStack.Screen name="BarPage" component={BarPage} />
+    </EventsStack.Navigator>
+  );
 }
 
-function SeachRouter(){
-    return(
-        <SearchStack.Navigator headerMode='none'>
-            <SearchStack.Screen name='Search' component={Search}/>
-            <SearchStack.Screen name='BarList' component={BarList}/>
-            <SearchStack.Screen name='BarPage' component={BarPage}/>
-        </SearchStack.Navigator>
-    )
+function SeachRouter() {
+  return (
+    <SearchStack.Navigator headerMode="none">
+      <SearchStack.Screen name="Search" component={Search} />
+      <SearchStack.Screen name="BarList" component={BarList} />
+      <SearchStack.Screen name="BarPage" component={BarPage} />
+    </SearchStack.Navigator>
+  );
 }
 
-function ProfileRouter(){
-    return(
-        <ProfileStack.Navigator headerMode='none'>
-            <ProfileStack.Screen name='Perfil' component={Profile}/>
-            <ProfileStack.Screen name='FavBars' component={FavBars}/>
-            <ProfileStack.Screen name='PaymentMethods' component={PaymentMethods}/>
-            <ProfileStack.Screen name='Help' component={Help}/>
-        </ProfileStack.Navigator>
-    )
+function ProfileRouter() {
+  return (
+    <ProfileStack.Navigator headerMode="none">
+      <ProfileStack.Screen name="Perfil" component={Profile} />
+      <ProfileStack.Screen name="FavBars" component={FavBars} />
+      <ProfileStack.Screen name="PaymentMethods" component={PaymentMethods} />
+      <ProfileStack.Screen name="Help" component={Help} />
+    </ProfileStack.Navigator>
+  );
 }
 
-function OrderSheetRouter(){
-    return(
-        <OrderSheetStack.Navigator headerMode='none'>
-            <OrderSheetStack.Screen name='Comanda' component={OrderSheet}/>
-            <OrderSheetStack.Screen name='Escanear' component={QRScanner}/>
-            <OrderSheetStack.Screen name='Menu' component={Menu}/>
-            <OrderSheetStack.Screen name='Payment' component={Payment}/>
-            <OrderSheetStack.Screen name='CheckOut' component={CheckOut}/>
-        </OrderSheetStack.Navigator>
-    )
+function OrderSheetRouter() {
+  return (
+    <OrderSheetStack.Navigator headerMode="none">
+      <OrderSheetStack.Screen name="Comanda" component={OrderSheet} />
+      <OrderSheetStack.Screen name="Escanear" component={QRScanner} />
+      <OrderSheetStack.Screen name="Menu" component={Menu} />
+      <OrderSheetStack.Screen name="Payment" component={Payment} />
+      <OrderSheetStack.Screen name="CheckOut" component={CheckOut} />
+    </OrderSheetStack.Navigator>
+  );
 }
