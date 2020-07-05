@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   TextInput as _TextInput,
   StyleSheet,
@@ -17,6 +17,7 @@ const TextInput = React.forwardRef((props, ref) => {
   const [labelText, setLabelText] = useState("");
   const [error, setError] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState();
+  const inputRef = useRef();
 
   useEffect(() => {
     if (props.label && labelText !== props.label) setLabelText(props.label);
@@ -25,6 +26,10 @@ const TextInput = React.forwardRef((props, ref) => {
   useEffect(() => {
     setError(props.error);
   }, [props.error]);
+
+  useEffect(() => {
+    setContent(props.value);
+  }, [props.value]);
 
   useEffect(() => {
     if (props.secureTextEntry === true) setPasswordVisible(true);
@@ -51,10 +56,11 @@ const TextInput = React.forwardRef((props, ref) => {
     labelStyle = {
       color: "#F4AA1D",
       position: "absolute",
-      left: 4,
+      left: 8,
+      alignSelf: "center",
       top: focusAnimated.interpolate({
         inputRange: [0, 1],
-        outputRange: [styles.textInput.paddingTop - 8, 0],
+        outputRange: [styles.textInput.paddingTop - 3, 4],
       }),
       fontSize: focusAnimated.interpolate({
         inputRange: [0, 1],
@@ -99,8 +105,21 @@ const TextInput = React.forwardRef((props, ref) => {
   }
 
   return (
-    <View style={props.style}>
-      <Animated.Text style={labelStyle}>{labelText}</Animated.Text>
+    <View
+      style={props.style}
+      onPress={() => {
+        if (props.onPress) props.onPress();
+      }}
+    >
+      <Animated.Text
+        style={labelStyle}
+        onPress={() => {
+          inputRef.current.focus();
+          if (props.onPress) props.onPress();
+        }}
+      >
+        {labelText}
+      </Animated.Text>
       <_TextInput
         placeholderTextColor={"#F4AA1D"}
         {...props}
@@ -108,7 +127,9 @@ const TextInput = React.forwardRef((props, ref) => {
         onFocus={handleFocus}
         onBlur={handleBlur}
         value={content}
-        ref={ref}
+        ref={(input) => {
+          inputRef.current = input;
+        }}
         onChangeText={handleOnChangeText}
         secureTextEntry={getTextInputSecureTextEntry()}
       />
@@ -155,7 +176,7 @@ function getStyles() {
     icon: {
       position: "absolute",
       right: 8,
-      top: 12,
+      top: 17,
     },
     textError: {
       color: "red",
