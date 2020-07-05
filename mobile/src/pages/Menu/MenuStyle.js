@@ -27,6 +27,7 @@ export default StyleSheet.create({
   infoContainer: {
     margin: 10,
     justifyContent: "space-around",
+    flexWrap: 'wrap',
   },
   productName: {
     textTransform: "uppercase",
@@ -34,7 +35,9 @@ export default StyleSheet.create({
   },
   productDescription: {
     color: "#ffffff",
-    fontSize: 10,
+    fontSize: 12,
+    flexWrap: 'wrap',
+    width: 200,
   },
   productPrice: {
     color: "#ffffff",
