@@ -39,10 +39,9 @@ export default function Routes() {
     async function getData() {
       const data = await AsyncStorage.getItem(`@friday:data`);
 
-      return JSON.parse(data);
+      JSON.parse(data);
+      if (data && data !== null) setUser(data);
     }
-    const data = getData();
-    if (data && data !== null) setUser(data);
   }, []);
 
   const authContext = useMemo(() => {
@@ -63,6 +62,7 @@ export default function Routes() {
       },
       signOut: () => {
         setUser(null);
+        AsyncStorage.removeItem(`@friday:data`);
       },
     };
   }, []);
