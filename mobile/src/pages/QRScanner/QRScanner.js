@@ -39,6 +39,7 @@ export default function QRScanner() {
       const response2 = await api.get(`order_sheets_id/${response.data}`);
       setOderSheet(response2.data);
     } catch (error) {
+      console.log(error);
       console.log(error.response);
       alert("Mesa não encontrada");
     }

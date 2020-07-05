@@ -34,7 +34,9 @@ function Order({ data }) {
 
 export default function OrderList({ navigation }) {
   const { getOrder } = useContext(ContextOrderSheet);
-  const orderSheet = getOrder();
+  let orderSheet = getOrder();
+
+  if (!orderSheet) orderSheet = {};
 
   const [data, setData] = useState([
     { amount: 1, name: "teste", price: 10 },
