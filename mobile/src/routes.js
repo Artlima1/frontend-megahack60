@@ -226,7 +226,7 @@ function OrderSheetRouter() {
         return order;
       },
     };
-  }, []);
+  }, [order]);
 
   return (
     <OrderSheetContext.Provider value={orderSheetContext}>

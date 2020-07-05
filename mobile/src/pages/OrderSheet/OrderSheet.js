@@ -1,9 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styles from "./OrderSheetStyle";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { Button } from "react-native-paper";
 import { FlatList } from "react-native-gesture-handler";
 import ContextOrderSheet from "../../contextOrderSheet";
+import api from "../../Services/api";
 
 function Order({ data }) {
   const total = data.price * data.amount;
@@ -32,7 +33,7 @@ function Order({ data }) {
   );
 }
 
-export default function OrderList({ navigation }) {
+export default function OrderList({ navigation, route }) {
   const { getOrder } = useContext(ContextOrderSheet);
   let orderSheet = getOrder();
 
@@ -55,10 +56,19 @@ export default function OrderList({ navigation }) {
     }).format(totalSum);
   }
 
+  useEffect(() => {
+    api
+      .get(`orders/fromsheet/${orderSheet.id}`)
+      .then((response) => setData(response.data));
+  }, [route.params]);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Image height={70} width={70} style={styles.barImage}></Image>
+        <Image
+          source={{ uri: `https://drive.google.com/uc?id=${orderSheet.image_id}` }}
+          style={{ width: 70, height: 70, borderRadius: 100 }}
+        />
         <View style={styles.headerTextView}>
           <Text style={styles.titleText}>COMANDA</Text>
           <Text style={styles.subTitleText}>
@@ -84,9 +94,9 @@ export default function OrderList({ navigation }) {
               mode={"contained"}
               icon={"plus-circle"}
               color={"#2D9235"}
-  
-              onPress={()=>{navigation.push('Menu', {bar_id: 'e43b7070-be3b-11ea-80e8-5d1814de3e58'})}}
-
+              onPress={() => {
+                navigation.push("Menu");
+              }}
             >
               Adicionar mais itens
             </Button>
@@ -112,13 +122,6 @@ export default function OrderList({ navigation }) {
       >
         Pagar Agora
       </Button>
-
-      <Button
-        title="Fazer Pedido"
-        onPress={() => {
-          navigation.push("Menu");
-        }}
-      />
     </View>
   );
 }

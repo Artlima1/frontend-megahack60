@@ -71,7 +71,6 @@ export default StyleSheet.create({
     alignItems: "flex-end",
   },
   barImage: {
-    backgroundColor: "gray",
     borderRadius: 100,
   },
 });

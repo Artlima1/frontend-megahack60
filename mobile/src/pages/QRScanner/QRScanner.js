@@ -72,8 +72,8 @@ export default function QRScanner() {
       )}
       <IconButton
         icon="alphabetical"
-        style={{ position: "absolute", top: 16, right: 16 }}
-        color="black"
+        style={{ position: "absolute", top: 16, right: 16, elevation: 4 }}
+        color="white"
         size={35}
         onPress={() => {
           setModal(true);
