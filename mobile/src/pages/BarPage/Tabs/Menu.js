@@ -47,6 +47,8 @@ const styles = StyleSheet.create({
     tabHighlight: {
         padding: 10,
         backgroundColor: '#2A2A2A',
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10
     },
     tabNormal: {
         padding: 10,
