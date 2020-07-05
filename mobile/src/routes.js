@@ -273,7 +273,11 @@ function OrderSheetRouter() {
         <OrderSheetStack.Screen name="Menu" component={Menu} />
         <OrderSheetStack.Screen name="Payment" component={Payment} />
         <OrderSheetStack.Screen name="CheckOut" component={CheckOut} />
+        <OrderSheetStack.Screen name="PaymentMethods" component={PaymentMethods} />
       </OrderSheetStack.Navigator>
     </OrderSheetContext.Provider>
+      
   );
 }
+
+

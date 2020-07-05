@@ -1,20 +1,13 @@
 import React from 'react'
 
-import {Text, View, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import {Text, View, TouchableOpacity} from 'react-native';
 import styles from "../PaymentMethodsStyle";
-
+import { useNavigation } from '@react-navigation/native';
 import { CreditCardInput } from "react-native-input-credit-card";
  
 
-const PagarCartao = () => (
-    <View>
-        <TouchableOpacity onPress={()=>{navigation.navigate('Payment')}} style={styles.buttonPagarCartao}>
-            <Text style={styles.finalizarPagamentoText}>Pagar</Text>
-            </TouchableOpacity>
-    </View>
-    );
-
 export default function CardMethods(){
+    const navigation = useNavigation();
     function handleChange(form){
         console.log(form);
     }
@@ -36,7 +29,11 @@ export default function CardMethods(){
         fontSize: 15,
         }}
         />
-        <PagarCartao/>
+        <View>
+            <TouchableOpacity onPress={() => navigation.navigate('Payment')} style={styles.buttonPagarCartao}>
+                <Text style={styles.finalizarPagamentoText}>Pagar</Text>
+                </TouchableOpacity>
+        </View>
     </View>
 )};
 

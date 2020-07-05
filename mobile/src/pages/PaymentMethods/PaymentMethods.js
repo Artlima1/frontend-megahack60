@@ -3,7 +3,7 @@ import React from 'react'
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import styles from "./PaymentMethodsStyle";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-
+import { useNavigation } from '@react-navigation/native';
 
 import CashMethods from './Component/CashMethods'
 import CardMethods from './Component/CardMethods'
@@ -14,13 +14,14 @@ const Tab = createMaterialTopTabNavigator();
 
 
 export default function PaymentMethods(){
+    const navigation = useNavigation();
     const SeusPedidosButton = () => (
-        <TouchableOpacity onPress={() => {navigation.push("CheckOut")}} style={styles.seusPedidosContainer}>
-        <Ionicons name="md-clipboard" size={70} color="#FFFFFF"style={styles.seusPedidosIcon} />
-        <View style={styles.seusPedidosView}>
-            <Text style={styles.seusPedidosText}>Seus pedidos</Text>
-         </View>
-    </TouchableOpacity>
+        <TouchableOpacity onPress={() => {navigation.navigate('Comanda')}} style={styles.seusPedidosContainer}>
+            <Ionicons name="md-clipboard" size={70} color="#FFFFFF"style={styles.seusPedidosIcon} />
+            <View style={styles.seusPedidosView}>
+                <Text style={styles.seusPedidosText}>Seus pedidos</Text>
+            </View>
+        </TouchableOpacity>
     );
 
     return(
