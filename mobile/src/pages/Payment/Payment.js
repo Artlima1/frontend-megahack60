@@ -33,10 +33,10 @@ export default function Payment({navigation}){
                 <View style={styles.grayColor} />
                 <Text style={styles.totalText}> TOTAL: </Text>
                 <Text style={styles.totalNumber}>
-                    100,00
+                    R$ 100,00
                 </Text>
                 <View style={styles.cardLine}>
-                    <Entypo name="credit-card" size={24} color="#FFFFFF" style={styles.cardIcon} />
+                    <Entypo name="credit-card" size={30} color="#FFFFFF" style={styles.cardIcon} />
                     <View style={styles.cardLineContainer}>
                         <Text style={styles.cardNumber}>
                             *** *** *** 236
@@ -46,8 +46,12 @@ export default function Payment({navigation}){
                 {/* <Button> */}
                     <Text  style={styles.changeMethod}> Mudar metódo de pagamento </Text>
                 {/* </Button>     */}
+
                 <Text style={styles.tip}>Adicionar taxa de atendimento de: </Text>
-                <View style={styles.tipContainer}><Text style={styles.tipText}>R$ 5,00</Text></View>
+                <View style={styles.tipContainer}>
+                    <View style={styles.coloredTipContainer} />
+                    <Text style={styles.tipText}>R$ 5,00</Text>
+                </View>
                 <View><FinalizarPagamentoButton title='Finzalizar Pagamento' /></View>
             </View>
         </View>

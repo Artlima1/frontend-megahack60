@@ -67,13 +67,8 @@ export default StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 25,
         fontWeight: 'bold',
-        marginLeft: 10,
-    },
-    totalText: {
-        alignSelf: 'center',
-        color: '#FFFFFF',
-        fontSize: 25,
-        fontWeight: 'bold',
+        marginLeft: 50,
+        marginTop: 10
     },
     totalNumber: {
         alignSelf: 'center',
@@ -87,23 +82,28 @@ export default StyleSheet.create({
         justifyContent: 'center',
     },
     cardLineContainer: {
+        flexDirection: 'column',
+        justifyContent: 'center',
         backgroundColor: '#FFFFFF',
         color: '#FFFFFF',
+        height: 25,
         width: 150,
         alignItems: 'center',
         borderRadius: 4,
         opacity: 0.5,
         marginLeft: 10
     },
+    cardNumber: {
+        color: '#000',
+        fontSize: 15,
+        alignSelf: 'center'
+    },
     changeMethod: {
         alignSelf: 'center',
-        fontWeight: 'bold',
+        fontSize: 10
+,        fontWeight: 'bold',
         color: '#FFFFFF',
         textDecorationLine: 'underline',
-    },
-    cardNumber: {
-        color: '#FFFFFF',
-        fontSize: 10,
     },
     tip: {
         alignSelf: 'center',
@@ -111,18 +111,23 @@ export default StyleSheet.create({
         fontSize: 10,
     },
     tipContainer: {
-        backgroundColor: '#FFFFFF',
         width: 150,
         height: 60,
         alignItems: 'center',
-        borderRadius: 4,
-        opacity: 0.5,
         alignSelf: 'center',
+    },
+    coloredTipContainer: {
+        opacity: 0.5,
+        borderRadius: 4,
+        width: 150,
+        height: 60,
+        backgroundColor: '#FFFFFF',
     },
     tipText: {
         alignSelf: 'center',
         color: '#FFFFFF',
         fontSize: 30,
         fontWeight: 'bold',
+        position: 'absolute',
     }
 });
