@@ -26,6 +26,7 @@ export default StyleSheet.create({
   },
   button: {
     marginHorizontal: 16,
+    marginBottom: 16,
   },
   orderView: {
     flexDirection: "row",
@@ -49,12 +50,16 @@ export default StyleSheet.create({
   textSmall: {},
   textTotal: {
     color: "white",
-    fontSize: 30,
-    textAlign: "center",
-    marginBottom: 16,
+    fontSize: 18,
+    textAlign: "right",
+  },
+  textTotal2: {
+    color: "white",
+    fontSize: 24,
+    textAlign: "right",
+    fontWeight: "bold",
   },
   addButton: {
-    marginHorizontal: 16,
     marginVertical: 8,
   },
   titleText: {

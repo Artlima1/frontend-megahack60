@@ -66,7 +66,9 @@ export default function OrderList({ navigation, route }) {
     <View style={styles.container}>
       <View style={styles.header}>
         <Image
-          source={{ uri: `https://drive.google.com/uc?id=${orderSheet.image_id}` }}
+          source={{
+            uri: `https://drive.google.com/uc?id=${orderSheet.image_id}`,
+          }}
           style={{ width: 70, height: 70, borderRadius: 100 }}
         />
         <View style={styles.headerTextView}>
@@ -102,16 +104,19 @@ export default function OrderList({ navigation, route }) {
             </Button>
           }
         />
-        <View>
-          <Text style={styles.textTotal}>TOTAL: {getTotalPrice()}</Text>
+        <View style={styles.line} />
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "flex-end",
+            padding: 16,
+          }}
+        >
+          <Text style={styles.textTotal}>Total:</Text>
+          <Text style={styles.textTotal2}> {getTotalPrice()}</Text>
         </View>
       </View>
-      <Button
-        title="Ler QR"
-        onPress={() => {
-          navigation.push("Escanear");
-        }}
-      />
       <Button
         mode="contained"
         labelStyle={styles.labelStyle}
