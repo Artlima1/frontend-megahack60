@@ -46,6 +46,8 @@ function BarCard({ bar }) {
     ? bar.event_image_link
     : `https://drive.google.com/uc?id=${bar.image_id}`;
 
+  const distance = bar.distance;
+
   return (
     <TouchableHighlight
       onPress={() => {
@@ -77,9 +79,24 @@ function BarCard({ bar }) {
                   fontSize: 10,
                 }}
               >
-                {guests} pessoas
+                {guests ? guests : 0} pessoas
               </Text>
             </View>
+            {distance && (
+              <View style={{ flexGrow: 1 }}>
+                <Text
+                  style={{
+                    color: "#757575",
+                    fontWeight: "bold",
+                    fontSize: 10,
+                    width: "100%",
+                    textAlign: "center",
+                  }}
+                >
+                  {Math.round(distance)} km
+                </Text>
+              </View>
+            )}
           </View>
         </Card.Content>
       </Card>
