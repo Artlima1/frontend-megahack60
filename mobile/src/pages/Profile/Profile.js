@@ -8,6 +8,24 @@ import { Text, View, TouchableOpacity, Image } from "react-native";
 export default function Profile({ navigation }) {
   const { signOut } = useContext(AuthContext);
 
+const User = {
+    userName: 'Tábata Silva Carneiro',
+}
+
+
+export default function Profile({navigation}){
+    const { signOut } = useContext(AuthContext)
+
+    const ProfileButtons = ({onPress, title}) => (
+        <TouchableOpacity onPress={onPress} style={styles.optionsButtonContainer}>
+                <Text style={styles.optionsButtonText}>{title}</Text>
+        </TouchableOpacity>
+);
+    return(
+        <View style={styles.container}>
+                <View style={styles.profileHeader}> 
+                    <Text style={styles.profileTitle}>PERFIL</Text>
+                </View>
   const ProfileButtons = ({ onPress, title, subtitle, icon }) => (
     <TouchableOpacity onPress={onPress} style={styles.optionsButtonContainer}>
       {icon}
