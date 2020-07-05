@@ -36,7 +36,7 @@ export default function SignUp({ navigation }) {
             password,
           });
 
-          signIn(response);
+          signIn(response.data);
         }
       } catch (error) {
         console.log(error.response.data);

@@ -38,10 +38,11 @@ export default function Routes() {
   const authContext = useMemo(() => {
     return {
       signIn: (user) => {
-        setUser(user);
+				setUser(user);
+				console.log(user)
         api.interceptors.request.use(
           (config) => {
-            const token = user.token;
+            const token = user.accessToken;
             if (token && token !== " ")
               config.headers.authorization = `Bearer ${token}`;
 
