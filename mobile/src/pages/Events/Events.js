@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Header,
@@ -14,12 +14,21 @@ import { IconButton, Avatar, Card, Title, Paragraph } from "react-native-paper";
 import Stars from "react-native-stars";
 import { FlatList, TouchableHighlight } from "react-native";
 import BarList from "../../Components/Barlist";
+import api from "../../Services/api";
 
 export default function Events({ navigation }) {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    api.get("event").then((response) => {
+      setData(response.data);
+    });
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <BarList bars={[{ name: "a" }, { name: "b" }]} />
+        <BarList bars={data} />
       </ScrollView>
     </SafeAreaView>
   );
