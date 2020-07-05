@@ -12,7 +12,7 @@ export default StyleSheet.create({
         alignItems: 'center',
 
         padding: 20,
-        backgroundColor: '#455056',
+        backgroundColor: '#1d1d1d',
         height: 160,
     },
     seusPedidosContainer: {
