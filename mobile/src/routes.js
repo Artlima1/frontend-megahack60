@@ -197,11 +197,43 @@ function EventsRouter() {
 }
 
 function SeachRouter() {
+  const navigation = useNavigation();
   return (
-    <SearchStack.Navigator headerMode="none">
-      <SearchStack.Screen name="Search" component={Search} />
-      <SearchStack.Screen name="BarList" component={BarList} />
-      <SearchStack.Screen name="BarPage" component={BarPage} />
+    <SearchStack.Navigator>
+      <SearchStack.Screen
+        name="Search"
+        component={Search}
+        options={{
+          headerShown: true,
+          title: "Pesquisa",
+          headerRight: (props) => {
+            return (
+              <IconButton
+                icon="qrcode-scan"
+                color="white"
+                size={35}
+                onPress={() => {
+                  navigation.navigate("Comanda");
+                }}
+              />
+            );
+          },
+        }}
+      />
+      <SearchStack.Screen
+        name="BarList"
+        component={BarList}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <SearchStack.Screen
+        name="BarPage"
+        component={BarPage}
+        options={{
+          headerShown: false,
+        }}
+      />
     </SearchStack.Navigator>
   );
 }
