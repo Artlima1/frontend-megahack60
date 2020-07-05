@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import AuthContext from "../../context";
 
 import { AntDesign, Entypo, Ionicons } from "@expo/vector-icons";
@@ -15,7 +15,14 @@ const ProfileButtons = ({ onPress, title, subtitle, icon }) => (
 
 export default function Profile({ navigation }) {
   const { signOut, getData } = useContext(AuthContext);
-  const User = getData().user;
+
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    let newUser = getData().user;
+    setUser(newUser);
+  }, [getData]);
+
   return (
     <View style={styles.container}>
       <View style={styles.profileHeader}>
@@ -27,7 +34,7 @@ export default function Profile({ navigation }) {
 
       <View style={styles.userStyle}>
         <Text style={styles.userText}>
-          {User.name} {User.surname}
+          {user.name} {user.surname}
         </Text>
         <Image
           style={styles.userImage}

@@ -88,7 +88,7 @@ export default function Routes() {
         return user;
       },
     };
-  }, []);
+  }, [user]);
 
   const MyTheme = {
     ...DefaultTheme,
