@@ -20,6 +20,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import Stars from "react-native-stars";
 import api from "../../Services/api";
+import { IconButton } from "react-native-paper";
 /*
 const bar = {
   name: "The House",
@@ -174,7 +175,7 @@ const products = [
     price: 14.5,
   },
 ];
-*/
+
 
 const comments = [
   {
@@ -199,22 +200,22 @@ const comments = [
     description: "Sai pra la ô carai",
   },
 ];
-
+*/
 export default function ParPage({ navigation, route }) {
   const { bar, avaliation, guests } = route.params;
 
   const [tab, setTab] = useState("description");
   const [products, setProducts] = useState([]);
-	const [comments, setComments] = useState([]);
-	
+  const [comments, setComments] = useState([]);
+
   useEffect(() => {
     api.get(`menu/${bar.id}`).then((response) => {
       setProducts(response.data);
-		});
-		
-		api.get(`comment/${bar.id}`).then((response) =>{
-			setComments(response.data);
-		});
+    });
+
+    api.get(`comment/${bar.id}`).then((response) => {
+      setComments(response.data);
+    });
   }, []);
 
   return (
@@ -222,13 +223,16 @@ export default function ParPage({ navigation, route }) {
       <ScrollView>
         <View style={styles.header}>
           <View style={styles.backAndName}>
-            <Ionicons
-              name="ios-arrow-back"
-              size={60}
-              color="#F4AA1D"
+            <IconButton
+              icon="arrow-left"
+              mode="text"
               onPress={() => {
                 navigation.pop();
               }}
+              color={"#F4AA1D"}
+              size={40}
+              style={styles.backButton}
+              labelStyle={styles.textButton}
             />
             <Text style={styles.barName}> {bar.name} </Text>
           </View>
