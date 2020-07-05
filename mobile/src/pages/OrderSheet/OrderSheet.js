@@ -84,9 +84,9 @@ export default function OrderList({ navigation }) {
               mode={"contained"}
               icon={"plus-circle"}
               color={"#2D9235"}
-              onPress={() => {
-                navigation.push("Menu");
-              }}
+  
+              onPress={()=>{navigation.push('Menu', {bar_id: 'e43b7070-be3b-11ea-80e8-5d1814de3e58'})}}
+
             >
               Adicionar mais itens
             </Button>

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import api from "../../Services/api";
 
 import { Image, Text, View, TouchableHighlight, ScrollView } from "react-native";
 
@@ -9,132 +10,38 @@ import { Ionicons } from '@expo/vector-icons';
 import Modal from 'react-native-modal';
 import ModalContent from './Components/ModalContent'
 
-const products = [
-    {
-        name: 'Espetinho',
-        product_categ: 'portion',
-        image_id: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/old_logo.png',
-        description: 'AAAAAAAAAAAAAAAAAAA',
-        price: 14.5
-    },
-    {
-        name: 'Heineken',
-        product_categ: 'drink',
-        image_id: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/old_logo.png',
-        description: 'AAAAAAAAAAAAAAAAAAA',
-        price: 14.5
-    },
-    {
-        name: 'bud',
-        product_categ: 'drink',
-        image_id: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/old_logo.png',
-        description: 'AAAAAAAAAAAAAAAAAAA',
-        price: 14.5
-    },
-    {
-        name: 'Petit gateau',
-        product_categ: 'desert',
-        image_id: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/old_logo.png',
-        description: 'AAAAAAAAAAAAAAAAAAA',
-        price: 14.5
-    },
-    {
-        name: 'Batata Frita',
-        product_categ: 'portion',
-        image_id: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/old_logo.png',
-        description: 'AAAAAAAAAAAAAAAAAAA',
-        price: 14.5
-    },
-    {
-        name: 'Mandioquinha',
-        product_categ: 'portion',
-        image_id: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/old_logo.png',
-        description: 'AAAAAAAAAAAAAAAAAAA',
-        price: 14.5
-    },
-    {
-        name: 'Sorvete',
-        product_categ: 'desert',
-        image_id: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/old_logo.png',
-        description: 'AAAAAAAAAAAAAAAAAAA',
-        price: 14.5
-    },
-    {
-        name: 'Skol Beats',
-        product_categ: 'drink',
-        image_id: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/old_logo.png',
-        description: 'AAAAAAAAAAAAAAAAAAA',
-        price: 14.5
-    },
-    {
-        name: 'Gim Tônica',
-        product_categ: 'drink',
-        image_id: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/old_logo.png',
-        description: 'AAAAAAAAAAAAAAAAAAA',
-        price: 14.5
-    },
-    {
-        name: 'Corotinho',
-        product_categ: 'drink',
-        image_id: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/old_logo.png',
-        description: 'AAAAAAAAAAAAAAAAAAA',
-        price: 14.5
-    },
-    {
-        name: 'Kibe Vegano',
-        product_categ: 'portion',
-        image_id: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/old_logo.png',
-        description: 'AAAAAAAAAAAAAAAAAAA',
-        price: 14.5
-    },
-    {
-        name: 'Torta de limão',
-        product_categ: 'desert',
-        image_id: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/old_logo.png',
-        description: 'AAAAAAAAAAAAAAAAAAA',
-        price: 14.5
-    },
-    {
-        name: 'Hamburguer',
-        product_categ: 'portions',
-        image_id: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/old_logo.png',
-        description: 'AAAAAAAAAAAAAAAAAAA',
-        price: 14.5
-    },
-    {
-        name: 'Vodka + Energético',
-        product_categ: 'drink',
-        image_id: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/old_logo.png',
-        description: 'AAAAAAAAAAAAAAAAAAA',
-        price: 14.5
-    },
-    {
-        name: 'Tequila Shot',
-        product_categ: 'drink',
-        image_id: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/old_logo.png',
-        description: 'AAAAAAAAAAAAAAAAAAA',
-        price: 14.5
-    },
-    {
-        name: 'Bolo Chocolate',
-        product_categ: 'desert',
-        image_id: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/old_logo.png',
-        description: 'AAAAAAAAAAAAAAAAAAA',
-        price: 14.5
-    },
-]
 
-
-export default function Menu({navigation}){
+export default function Menu({navigation, route}){
+    const { bar_id } = route.params
+    const [products, setProducts] = useState([])
     const [modalFlag, setModalFlag] = useState(false)
     const [selectedProduct, setSelectedProduct] = useState()
-    const [portions, setPortions] = useState(firstArray('portion', products))
-    const [drinks, setDrinks] = useState(firstArray('drink', products))
-    const [deserts, setDeserts] = useState(firstArray('desert', products))
-    const [currentMenu, setCurrentMenu] = useState({
-        tab: 'portions',
-        menu: portions
-    })
+    const [portions, setPortions] = useState([])
+    const [drinks, setDrinks] = useState([])
+    const [deserts, setDeserts] = useState([])
+    const [currentMenu, setCurrentMenu] = useState()
+
+    useEffect(()=>{
+        api.get(`menu/${bar_id}`).then((response) => {
+            setPortions(makeCategArray('portion', response.data))
+            setDeserts(makeCategArray('desert', response.data))
+            setDrinks(makeCategArray('drink', response.data))
+            setCurrentMenu({
+                tab: 'portions',
+                menu: portions
+            })
+        }).catch(error=>{
+            console.log(error)
+        })
+    },[])
+
+    useEffect(()=>{
+        console.log('drinks: ')
+        console.log(drinks)
+    },[drinks])
+
+    function getMenu(bar_id){
+    };
 
     function getTotalPrice(totalSum) {
         return Intl.NumberFormat("pt-BR", {
@@ -143,10 +50,11 @@ export default function Menu({navigation}){
         }).format(totalSum);
     }
 
-    function firstArray(categ, searchProducts){
+    function makeCategArray(categ, searchProducts){
+        console.log(searchProducts)
         const array = []
         searchProducts.map((product)=>{
-            if(product.product_categ===categ){
+            if(product.category===categ){
                 array.push(product)
             }
         })
@@ -204,52 +112,64 @@ export default function Menu({navigation}){
 
             <View style={styles.background}>
                 <View style={styles.tabsContainer}>
-                    <TouchableHighlight onPress={()=>{selectTab('portions')}}>
-                        {
-                            (currentMenu.tab==='portions') ?
-                            <View style={styles.tabHighlight}>
-                                <Text style={styles.tabText}>Porções</Text>
-                            </View>
-                            :
-                            <View style={styles.tabNormal}>
-                                <Text style={styles.tabText}>Porções</Text>
-                            </View>
-                        }
-                    </TouchableHighlight>
-                    <TouchableHighlight onPress={()=>{selectTab('drinks')}}>
-                        {
-                            (currentMenu.tab==='drinks') ?
-                            <View style={styles.tabHighlight}>
-                                <Text style={styles.tabText}>Drinks</Text>
-                            </View>
-                            :
-                            <View style={styles.tabNormal}>
-                                <Text style={styles.tabText}>Drinks</Text>
-                            </View>
-                        }
-                    </TouchableHighlight>
-                    <TouchableHighlight onPress={()=>{selectTab('deserts')}}>
-                        {
-                            (currentMenu.tab==='deserts') ?
-                            <View style={styles.tabHighlight}>
-                                <Text style={styles.tabText}>Sobremesas</Text>
-                            </View>
-                            :
-                            <View style={styles.tabNormal}>
-                                <Text style={styles.tabText}>Sobremesas</Text>
-                            </View>
-                        }
-                    </TouchableHighlight>
+                    {
+                        portions &&
+                        <TouchableHighlight onPress={()=>{selectTab('portions')}}>
+                            {
+                                (currentMenu !== undefined) && 
+                                (currentMenu.tab==='portions') ?
+                                <View style={styles.tabHighlight}>
+                                    <Text style={styles.tabText}>Porções</Text>
+                                </View>
+                                :
+                                <View style={styles.tabNormal}>
+                                    <Text style={styles.tabText}>Porções</Text>
+                                </View>
+                            }
+                        </TouchableHighlight>
+                    }
+                    {
+                        drinks &&
+                        <TouchableHighlight onPress={()=>{selectTab('drinks')}}>
+                            {
+                                (currentMenu !== undefined) &&
+                                (currentMenu.tab==='drinks') ?
+                                <View style={styles.tabHighlight}>
+                                    <Text style={styles.tabText}>Drinks</Text>
+                                </View>
+                                :
+                                <View style={styles.tabNormal}>
+                                    <Text style={styles.tabText}>Drinks</Text>
+                                </View>
+                            }
+                        </TouchableHighlight>
+                    }
+                    {
+                        deserts &&
+                        <TouchableHighlight onPress={()=>{selectTab('deserts')}}>
+                            {
+                                (currentMenu !== undefined) &&
+                                (currentMenu.tab==='deserts') ?
+                                <View style={styles.tabHighlight}>
+                                    <Text style={styles.tabText}>Sobremesas</Text>
+                                </View>
+                                :
+                                <View style={styles.tabNormal}>
+                                    <Text style={styles.tabText}>Sobremesas</Text>
+                                </View>
+                            }
+                        </TouchableHighlight>
+                    }
                 </View>
                 <ScrollView style={styles.menuContainer}>
                     {
-                        currentMenu &&
+                        (currentMenu !== undefined) &&
                         currentMenu.menu.map(product=>{
                             return (
                                 <View>
                                     <TouchableHighlight onPress={()=>{selectProduct(product)}}>
                                     <View style={styles.productContainer}>
-                                        <Image source={{ uri: product.image_id}} style={{width: 100, height: 100, borderRadius: 15}} />
+                                        <Image source={{ uri: `https://drive.google.com/uc?id=${product.image_id}` }} style={{width: 100, height: 100, borderRadius: 15}} />
                                         <View style={styles.infoContainer}>
                                             <Text style={styles.productName}>{product.name}</Text>
                                             <Text style={styles.productDescription}>{product.description}</Text>
