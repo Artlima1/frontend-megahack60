@@ -9,6 +9,7 @@ In the plataform, users can look every registered bar menu, pictures, adress, bu
 Also, there is a plataform to search for events and promotions registered by the bars
 
 PS: the user has to create an account to use the App Features
+
 PS2: Registering the credit card is optional and the user can elect to pay in cash to check-out
 
 This repository contains the React Native Project for the user experience
